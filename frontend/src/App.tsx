@@ -3,15 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  HERO_PORTRAIT_IMAGE,
-} from './data/projects';
-import {
-  Language,
-  TRANSLATIONS,
-  TranslatedProject,
-} from './data/translations';
+import React, { useEffect, useRef, useState } from "react";
+import { HERO_PORTRAIT_IMAGE } from "./data/projects";
+import { Language, TRANSLATIONS, TranslatedProject } from "./data/translations";
 import {
   IconErrorExclamation,
   IconFrontendMentor,
@@ -20,10 +14,10 @@ import {
   IconTwitter,
   PatternCircle,
   PatternRings,
-} from './components/Icons';
-import { ProjectModal } from './components/ProjectModal';
-import { DesignSystemModal } from './components/DesignSystemModal';
-import { ScrollDrivenHeroVideo } from './components/ScrollDrivenHeroVideo';
+} from "./components/Icons";
+import { ProjectModal } from "./components/ProjectModal";
+import { DesignSystemModal } from "./components/DesignSystemModal";
+import { ScrollDrivenHeroVideo } from "./components/ScrollDrivenHeroVideo";
 
 interface FormValues {
   name: string;
@@ -39,24 +33,19 @@ interface FormErrors {
 
 const SOCIAL_LINKS = [
   {
-    name: 'GitHub',
-    href: 'https://github.com',
+    name: "GitHub",
+    href: "https://github.com/barriedirk",
     icon: IconGitHub,
   },
   {
-    name: 'Frontend Mentor',
-    href: 'https://www.frontendmentor.io',
+    name: "Frontend Mentor",
+    href: "https://www.frontendmentor.io/profile/barriedirk",
     icon: IconFrontendMentor,
   },
   {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com',
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/barriefreyre/",
     icon: IconLinkedIn,
-  },
-  {
-    name: 'Twitter',
-    href: 'https://twitter.com',
-    icon: IconTwitter,
   },
 ];
 
@@ -67,36 +56,37 @@ export default function App() {
   // Language state (default 'en' per Frontend Mentor challenge, or user preference)
   const [lang, setLang] = useState<Language>(() => {
     try {
-      const saved = localStorage.getItem('adam_keyes_lang');
-      if (saved === 'es' || saved === 'en') return saved;
+      const saved = localStorage.getItem("adam_keyes_lang");
+      if (saved === "es" || saved === "en") return saved;
     } catch {
       // Ignore localStorage access issues
     }
-    return 'en';
+    return "en";
   });
 
   const t = TRANSLATIONS[lang];
 
   useEffect(() => {
     try {
-      localStorage.setItem('adam_keyes_lang', lang);
+      localStorage.setItem("adam_keyes_lang", lang);
       document.documentElement.lang = lang;
     } catch {
       // Ignore localStorage access issues
     }
   }, [lang]);
 
-  const [selectedProject, setSelectedProject] = useState<TranslatedProject | null>(null);
-  const [modalMode, setModalMode] = useState<'preview' | 'code'>('preview');
+  const [selectedProject, setSelectedProject] =
+    useState<TranslatedProject | null>(null);
+  const [modalMode, setModalMode] = useState<"preview" | "code">("preview");
   const [isDesignSystemOpen, setIsDesignSystemOpen] = useState(false);
 
   const isModalOpen = selectedProject !== null || isDesignSystemOpen;
 
   // Contact form state
   const [formValues, setFormValues] = useState<FormValues>({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const [touched, setTouched] = useState<Record<keyof FormValues, boolean>>({
     name: false,
@@ -114,19 +104,22 @@ export default function App() {
     }
   }, [lang, t.projects.list, selectedProject]);
 
-  const validateField = (field: keyof FormValues, value: string): string | undefined => {
+  const validateField = (
+    field: keyof FormValues,
+    value: string,
+  ): string | undefined => {
     const trimmed = value.trim();
-    if (field === 'name') {
+    if (field === "name") {
       if (!trimmed) return t.contact.errors.required;
       return undefined;
     }
-    if (field === 'email') {
+    if (field === "email") {
       if (!trimmed) return t.contact.errors.required;
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(trimmed)) return t.contact.errors.invalidEmail;
       return undefined;
     }
-    if (field === 'message') {
+    if (field === "message") {
       if (!trimmed) return t.contact.errors.required;
       return undefined;
     }
@@ -135,9 +128,9 @@ export default function App() {
 
   const validateAll = (values: FormValues): FormErrors => {
     const nextErrors: FormErrors = {};
-    const nameErr = validateField('name', values.name);
-    const emailErr = validateField('email', values.email);
-    const msgErr = validateField('message', values.message);
+    const nameErr = validateField("name", values.name);
+    const emailErr = validateField("email", values.email);
+    const msgErr = validateField("message", values.message);
     if (nameErr) nextErrors.name = nameErr;
     if (emailErr) nextErrors.email = emailErr;
     if (msgErr) nextErrors.message = msgErr;
@@ -175,32 +168,35 @@ export default function App() {
 
     if (Object.keys(validationErrors).length === 0) {
       setSubmittedMessage(t.contact.successMessage(formValues.name.trim()));
-      setFormValues({ name: '', email: '', message: '' });
+      setFormValues({ name: "", email: "", message: "" });
       setTouched({ name: false, email: false, message: false });
       setErrors({});
     }
   };
 
   const scrollToContact = () => {
-    contactSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    contactSectionRef.current?.scrollIntoView({ behavior: "smooth" });
     setTimeout(() => {
       nameInputRef.current?.focus();
     }, 450);
   };
 
-  const openProjectModal = (project: TranslatedProject, mode: 'preview' | 'code') => {
+  const openProjectModal = (
+    project: TranslatedProject,
+    mode: "preview" | "code",
+  ) => {
     setSelectedProject(project);
     setModalMode(mode);
   };
 
   const getBorderClass = (field: keyof FormValues) => {
     if (touched[field] && errors[field]) {
-      return 'border-[#FF6F5B] focus:border-[#FF6F5B]';
+      return "border-[#FF6F5B] focus:border-[#FF6F5B]";
     }
     if (formValues[field].trim().length > 0 && !errors[field]) {
-      return 'border-[#4EE1A0] focus:border-[#4EE1A0]';
+      return "border-[#4EE1A0] focus:border-[#4EE1A0]";
     }
-    return 'border-white/60 focus:border-[#4EE1A0]';
+    return "border-white/60 focus:border-[#4EE1A0]";
   };
 
   return (
@@ -226,7 +222,10 @@ export default function App() {
 
           <div className="flex items-center gap-6 md:gap-8 md:pr-[30px]">
             {/* Social Media Links */}
-            <nav aria-label={t.header.socialAria} className="flex items-center gap-5 md:gap-6">
+            <nav
+              aria-label={t.header.socialAria}
+              className="flex items-center gap-5 md:gap-6"
+            >
               {SOCIAL_LINKS.map((item) => {
                 const IconComponent = item.icon;
                 return (
@@ -252,12 +251,12 @@ export default function App() {
             >
               <button
                 type="button"
-                onClick={() => setLang('en')}
-                aria-pressed={lang === 'en'}
+                onClick={() => setLang("en")}
+                aria-pressed={lang === "en"}
                 className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                  lang === 'en'
-                    ? 'text-[#4EE1A0] border-b-2 border-[#4EE1A0]'
-                    : 'text-[#D9D9D9]/60 hover:text-white'
+                  lang === "en"
+                    ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
+                    : "text-[#D9D9D9]/60 hover:text-white"
                 }`}
               >
                 EN
@@ -267,12 +266,12 @@ export default function App() {
               </span>
               <button
                 type="button"
-                onClick={() => setLang('es')}
-                aria-pressed={lang === 'es'}
+                onClick={() => setLang("es")}
+                aria-pressed={lang === "es"}
                 className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                  lang === 'es'
-                    ? 'text-[#4EE1A0] border-b-2 border-[#4EE1A0]'
-                    : 'text-[#D9D9D9]/60 hover:text-white'
+                  lang === "es"
+                    ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
+                    : "text-[#D9D9D9]/60 hover:text-white"
                 }`}
               >
                 ES
@@ -304,7 +303,7 @@ export default function App() {
             </div>
 
             {/* Hero Copy Block */}
-            <div className="relative z-20 mt-10 md:mt-0 md:pt-[90px] lg:pt-[127px] text-center md:text-left max-w-[445px] md:max-w-[445px] lg:max-w-[706px] mx-auto md:mx-0">
+            <div className="relative z-20 mt-10 md:mt-0 md:pt-[90px] lg:pt-[127px] text-center md:text-left max-w-[455px] md:max-w-[455px] lg:max-w-[710px] mx-auto md:mx-0">
               <h1 className="heading-xl text-white">
                 <span className="block lg:inline">{t.hero.greetingLine1}</span>
                 <span className="block lg:inline">{t.hero.greetingLine2}</span>
@@ -347,7 +346,9 @@ export default function App() {
                   <h3 className="heading-l text-white mb-0.5 md:mb-[14px]">
                     {skill.name}
                   </h3>
-                  <p className="body-l text-[#D9D9D9]">{t.skills.yearsExperience(skill.years)}</p>
+                  <p className="body-l text-[#D9D9D9]">
+                    {t.skills.yearsExperience(skill.years)}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -393,7 +394,7 @@ export default function App() {
                     <div className="hidden lg:flex absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 flex-col items-center justify-center gap-12">
                       <button
                         type="button"
-                        onClick={() => openProjectModal(project, 'preview')}
+                        onClick={() => openProjectModal(project, "preview")}
                         aria-label={`${t.projects.viewProject}: ${project.title}`}
                         className="btn-underline"
                       >
@@ -401,7 +402,7 @@ export default function App() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => openProjectModal(project, 'code')}
+                        onClick={() => openProjectModal(project, "code")}
                         aria-label={`${t.projects.viewCode}: ${project.title}`}
                         className="btn-underline"
                       >
@@ -429,7 +430,7 @@ export default function App() {
                   <div className="flex lg:hidden items-center gap-[30px] mt-5">
                     <button
                       type="button"
-                      onClick={() => openProjectModal(project, 'preview')}
+                      onClick={() => openProjectModal(project, "preview")}
                       aria-label={`${t.projects.viewProject}: ${project.title}`}
                       className="btn-underline"
                     >
@@ -437,7 +438,7 @@ export default function App() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => openProjectModal(project, 'code')}
+                      onClick={() => openProjectModal(project, "code")}
                       aria-label={`${t.projects.viewCode}: ${project.title}`}
                       className="btn-underline"
                     >
@@ -494,12 +495,16 @@ export default function App() {
                         aria-required="true"
                         placeholder={t.contact.namePlaceholder}
                         aria-invalid={Boolean(touched.name && errors.name)}
-                        aria-describedby={touched.name && errors.name ? 'name-error' : undefined}
+                        aria-describedby={
+                          touched.name && errors.name ? "name-error" : undefined
+                        }
                         value={formValues.name}
-                        onChange={(e) => handleInputChange('name', e.target.value)}
-                        onBlur={() => handleInputBlur('name')}
+                        onChange={(e) =>
+                          handleInputChange("name", e.target.value)
+                        }
+                        onBlur={() => handleInputBlur("name")}
                         className={`w-full bg-transparent pb-4 pl-6 pr-10 border-b ${getBorderClass(
-                          'name'
+                          "name",
                         )} text-white placeholder:text-white/50 text-[16px] leading-[26px] tracking-[-0.22px] font-medium uppercase focus:outline-none transition-colors`}
                       />
                       {touched.name && errors.name && (
@@ -533,12 +538,18 @@ export default function App() {
                         aria-required="true"
                         placeholder={t.contact.emailPlaceholder}
                         aria-invalid={Boolean(touched.email && errors.email)}
-                        aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
+                        aria-describedby={
+                          touched.email && errors.email
+                            ? "email-error"
+                            : undefined
+                        }
                         value={formValues.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        onBlur={() => handleInputBlur('email')}
+                        onChange={(e) =>
+                          handleInputChange("email", e.target.value)
+                        }
+                        onBlur={() => handleInputBlur("email")}
                         className={`w-full bg-transparent pb-4 pl-6 pr-10 border-b ${getBorderClass(
-                          'email'
+                          "email",
                         )} text-white placeholder:text-white/50 text-[16px] leading-[26px] tracking-[-0.22px] font-medium uppercase focus:outline-none transition-colors`}
                       />
                       {touched.email && errors.email && (
@@ -569,15 +580,21 @@ export default function App() {
                         required
                         aria-required="true"
                         placeholder={t.contact.messagePlaceholder}
-                        aria-invalid={Boolean(touched.message && errors.message)}
+                        aria-invalid={Boolean(
+                          touched.message && errors.message,
+                        )}
                         aria-describedby={
-                          touched.message && errors.message ? 'message-error' : undefined
+                          touched.message && errors.message
+                            ? "message-error"
+                            : undefined
                         }
                         value={formValues.message}
-                        onChange={(e) => handleInputChange('message', e.target.value)}
-                        onBlur={() => handleInputBlur('message')}
+                        onChange={(e) =>
+                          handleInputChange("message", e.target.value)
+                        }
+                        onBlur={() => handleInputBlur("message")}
                         className={`w-full bg-transparent pb-4 pl-6 pr-10 border-b ${getBorderClass(
-                          'message'
+                          "message",
                         )} text-white placeholder:text-white/50 text-[16px] leading-[26px] tracking-[-0.22px] font-medium uppercase resize-none focus:outline-none transition-colors`}
                       />
                       {touched.message && errors.message && (
@@ -638,7 +655,10 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-6 md:gap-8">
-              <nav aria-label={t.footer.socialAria} className="flex items-center gap-6 md:gap-8">
+              <nav
+                aria-label={t.footer.socialAria}
+                className="flex items-center gap-6 md:gap-8"
+              >
                 {SOCIAL_LINKS.map((item) => {
                   const IconComponent = item.icon;
                   return (
@@ -664,12 +684,12 @@ export default function App() {
               >
                 <button
                   type="button"
-                  onClick={() => setLang('en')}
-                  aria-pressed={lang === 'en'}
+                  onClick={() => setLang("en")}
+                  aria-pressed={lang === "en"}
                   className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                    lang === 'en'
-                      ? 'text-[#4EE1A0] border-b-2 border-[#4EE1A0]'
-                      : 'text-[#D9D9D9]/60 hover:text-white'
+                    lang === "en"
+                      ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
+                      : "text-[#D9D9D9]/60 hover:text-white"
                   }`}
                 >
                   EN
@@ -679,12 +699,12 @@ export default function App() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => setLang('es')}
-                  aria-pressed={lang === 'es'}
+                  onClick={() => setLang("es")}
+                  aria-pressed={lang === "es"}
                   className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                    lang === 'es'
-                      ? 'text-[#4EE1A0] border-b-2 border-[#4EE1A0]'
-                      : 'text-[#D9D9D9]/60 hover:text-white'
+                    lang === "es"
+                      ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
+                      : "text-[#D9D9D9]/60 hover:text-white"
                   }`}
                 >
                   ES
