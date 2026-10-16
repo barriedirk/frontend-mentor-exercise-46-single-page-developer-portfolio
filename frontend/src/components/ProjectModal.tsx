@@ -1,15 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { TranslatedProject, Translations } from '../data/translations';
+import React, { useEffect, useRef, useState } from "react";
+import { TranslatedProject, Translations } from "../data/translations";
+import { IconExternalLink, IconGitHub } from "./Icons";
 
 interface ProjectModalProps {
   project: TranslatedProject | null;
-  initialMode: 'preview' | 'code';
-  t: Translations['projects'];
+  initialMode: "preview" | "code";
+  t: Translations["projects"];
   onClose: () => void;
 }
 
-export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalProps) {
-  const [activeTab, setActiveTab] = useState<'preview' | 'code'>(initialMode);
+export function ProjectModal({
+  project,
+  initialMode,
+  t,
+  onClose,
+}: ProjectModalProps) {
+  const [activeTab, setActiveTab] = useState<"preview" | "code">(initialMode);
   const [copied, setCopied] = useState(false);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -30,7 +36,7 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
       triggerElementRef.current = document.activeElement as HTMLElement | null;
       // Initial focus onto the active tab button or close button
       requestAnimationFrame(() => {
-        if (initialMode === 'code') {
+        if (initialMode === "code") {
           codeTabRef.current?.focus();
         } else {
           previewTabRef.current?.focus();
@@ -47,7 +53,7 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
   useEffect(() => {
     if (!project) return;
     const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = originalOverflow;
@@ -59,18 +65,18 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
     if (!project) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         e.stopPropagation();
         onClose();
         return;
       }
 
-      if (e.key === 'Tab') {
+      if (e.key === "Tab") {
         const modal = modalRef.current;
         if (!modal) return;
 
         const focusable = modal.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
         );
 
         if (focusable.length === 0) return;
@@ -92,8 +98,8 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [project, onClose]);
 
   if (!project) return null;
@@ -105,13 +111,13 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
   };
 
   const handleTabKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
       e.preventDefault();
-      if (activeTab === 'preview') {
-        setActiveTab('code');
+      if (activeTab === "preview") {
+        setActiveTab("code");
         codeTabRef.current?.focus();
       } else {
-        setActiveTab('preview');
+        setActiveTab("preview");
         previewTabRef.current?.focus();
       }
     }
@@ -134,7 +140,10 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
         {/* Modal Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/15 bg-[#151515]">
           <div>
-            <h2 id="modal-project-title" className="heading-m uppercase text-white">
+            <h2
+              id="modal-project-title"
+              className="heading-m uppercase text-white"
+            >
               {project.title}
             </h2>
             <ul
@@ -144,13 +153,70 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
               {project.tags.map((tag, idx) => (
                 <li key={tag} className="flex items-center gap-4">
                   <span>{tag}</span>
-                  {idx < project.tags.length - 1 && <span aria-hidden="true">·</span>}
+                  {idx < project.tags.length - 1 && (
+                    <span aria-hidden="true">·</span>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+            {/* External Links with Accessible Tooltips */}
+            <div className="flex items-center gap-2 border-r border-white/15 pr-4">
+              {/* Live Site Link */}
+              <div className="relative group/tooltip inline-flex items-center">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`header-live-${project.id}`}
+                  aria-describedby={`header-tooltip-live-${project.id}`}
+                  aria-label={`${t.liveDemoLabel}: ${project.title} (${t.liveSiteTooltip})`}
+                  className="w-10 h-10 flex items-center justify-center rounded-full text-white/80 hover:text-[#4EE1A0] hover:bg-white/10 focus-visible:text-[#4EE1A0] focus-visible:ring-2 focus-visible:ring-[#4EE1A0] focus:outline-none transition-all cursor-pointer"
+                >
+                  <IconExternalLink className="w-5 h-5" />
+                </a>
+                <span
+                  id={`header-tooltip-live-${project.id}`}
+                  role="tooltip"
+                  className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 scale-95 group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:scale-100 transition-all duration-150 px-2.5 py-1 text-xs font-normal text-white bg-[#151515] border border-white/20 rounded shadow-xl whitespace-nowrap z-50"
+                >
+                  {t.liveSiteTooltip}
+                  <span
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-[#151515]"
+                    aria-hidden="true"
+                  />
+                </span>
+              </div>
+
+              {/* GitHub Repo Link */}
+              <div className="relative group/tooltip inline-flex items-center">
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`header-repo-${project.id}`}
+                  aria-describedby={`header-tooltip-repo-${project.id}`}
+                  aria-label={`${t.githubLabel}: ${project.title} (${t.githubTooltip})`}
+                  className="w-10 h-10 flex items-center justify-center rounded-full text-white/80 hover:text-[#4EE1A0] hover:bg-white/10 focus-visible:text-[#4EE1A0] focus-visible:ring-2 focus-visible:ring-[#4EE1A0] focus:outline-none transition-all cursor-pointer"
+                >
+                  <IconGitHub className="w-5 h-5" />
+                </a>
+                <span
+                  id={`header-tooltip-repo-${project.id}`}
+                  role="tooltip"
+                  className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 scale-95 group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:scale-100 transition-all duration-150 px-2.5 py-1 text-xs font-normal text-white bg-[#151515] border border-white/20 rounded shadow-xl whitespace-nowrap z-50"
+                >
+                  {t.githubTooltip}
+                  <span
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-[#151515]"
+                    aria-hidden="true"
+                  />
+                </span>
+              </div>
+            </div>
+
             {/* Accessible Tab List */}
             <div
               role="tablist"
@@ -162,36 +228,36 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
                 id="tab-preview"
                 role="tab"
                 type="button"
-                aria-selected={activeTab === 'preview'}
+                aria-selected={activeTab === "preview"}
                 aria-controls="panel-preview"
-                tabIndex={activeTab === 'preview' ? 0 : -1}
-                onClick={() => setActiveTab('preview')}
+                tabIndex={activeTab === "preview" ? 0 : -1}
+                onClick={() => setActiveTab("preview")}
                 onKeyDown={handleTabKeyDown}
                 className={`text-sm font-bold tracking-[2px] uppercase pb-1 border-b-2 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#4EE1A0] ${
-                  activeTab === 'preview'
-                    ? 'text-[#4EE1A0] border-[#4EE1A0]'
-                    : 'text-[#D9D9D9] border-transparent hover:text-white'
+                  activeTab === "preview"
+                    ? "text-[#4EE1A0] border-[#4EE1A0]"
+                    : "text-[#D9D9D9] border-transparent hover:text-white"
                 }`}
               >
-                {t.viewProject}
+              {t.tabDetails}
               </button>
               <button
                 ref={codeTabRef}
                 id="tab-code"
                 role="tab"
                 type="button"
-                aria-selected={activeTab === 'code'}
+                aria-selected={activeTab === "code"}
                 aria-controls="panel-code"
-                tabIndex={activeTab === 'code' ? 0 : -1}
-                onClick={() => setActiveTab('code')}
+                tabIndex={activeTab === "code" ? 0 : -1}
+                onClick={() => setActiveTab("code")}
                 onKeyDown={handleTabKeyDown}
                 className={`text-sm font-bold tracking-[2px] uppercase pb-1 border-b-2 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#4EE1A0] ${
-                  activeTab === 'code'
-                    ? 'text-[#4EE1A0] border-[#4EE1A0]'
-                    : 'text-[#D9D9D9] border-transparent hover:text-white'
+                  activeTab === "code"
+                    ? "text-[#4EE1A0] border-[#4EE1A0]"
+                    : "text-[#D9D9D9] border-transparent hover:text-white"
                 }`}
               >
-                {t.viewCode}
+              {t.tabImplementation}
               </button>
             </div>
 
@@ -209,7 +275,7 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
 
         {/* Modal Body */}
         <div className="p-6 md:p-8 overflow-y-auto space-y-6">
-          {activeTab === 'preview' ? (
+          {activeTab === "preview" ? (
             <div
               id="panel-preview"
               role="tabpanel"
@@ -242,18 +308,77 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
                     <ul className="space-y-2.5 text-[#D9D9D9] text-base leading-relaxed list-none p-0">
                       {project.highlights.map((item) => (
                         <li key={item} className="flex items-start gap-3">
-                          <span className="text-[#4EE1A0] font-bold" aria-hidden="true">—</span>
+                          <span
+                            className="text-[#4EE1A0] font-bold"
+                            aria-hidden="true"
+                          >
+                            —
+                          </span>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-4 border-t border-white/15 flex flex-wrap items-center gap-8">
+                  <div className="pt-4 border-t border-white/15 flex flex-wrap items-center gap-6 md:gap-8">
+                    {/* Live Site Action Link */}
+                    <div className="relative group/tooltip inline-flex items-center">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`action-live-${project.id}`}
+                        aria-describedby={`tooltip-action-live-${project.id}`}
+                        aria-label={`${t.liveDemoLabel}: ${project.title} (${t.liveSiteTooltip})`}
+                        className="btn-underline inline-flex items-center gap-2 text-white hover:text-[#4EE1A0] focus-visible:text-[#4EE1A0] transition-colors"
+                      >
+                        <IconExternalLink className="w-4 h-4 text-[#4EE1A0]" />
+                        <span>{t.liveDemoLabel}</span>
+                      </a>
+                      <span
+                        id={`tooltip-action-live-${project.id}`}
+                        role="tooltip"
+                        className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 scale-95 group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:scale-100 transition-all duration-150 px-2.5 py-1 text-xs font-normal text-white bg-[#151515] border border-white/20 rounded shadow-xl whitespace-nowrap z-50"
+                      >
+                        {t.liveSiteTooltip}
+                        <span
+                          className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#151515]"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </div>
+
+                    {/* GitHub Repo Action Link */}
+                    <div className="relative group/tooltip inline-flex items-center">
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`action-repo-${project.id}`}
+                        aria-describedby={`tooltip-action-repo-${project.id}`}
+                        aria-label={`${t.githubLabel}: ${project.title} (${t.githubTooltip})`}
+                        className="btn-underline inline-flex items-center gap-2 text-white hover:text-[#4EE1A0] focus-visible:text-[#4EE1A0] transition-colors"
+                      >
+                        <IconGitHub className="w-4 h-4 text-[#4EE1A0]" />
+                        <span>{t.githubLabel}</span>
+                      </a>
+                      <span
+                        id={`tooltip-action-repo-${project.id}`}
+                        role="tooltip"
+                        className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 scale-95 group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:scale-100 transition-all duration-150 px-2.5 py-1 text-xs font-normal text-white bg-[#151515] border border-white/20 rounded shadow-xl whitespace-nowrap z-50"
+                      >
+                        {t.githubTooltip}
+                        <span
+                          className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#151515]"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </div>
+
                     <button
                       type="button"
                       onClick={() => {
-                        setActiveTab('code');
+                        setActiveTab("code");
                         codeTabRef.current?.focus();
                       }}
                       className="btn-underline"
@@ -288,7 +413,34 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
                     {t.snippetSubtitle(project.title)}
                   </p>
                 </div>
-                <div>
+                <div className="flex items-center gap-6">
+                  {/* GitHub Repo Link in Code Tab */}
+                  <div className="relative group/tooltip inline-flex items-center">
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id={`code-tab-repo-${project.id}`}
+                      aria-describedby={`tooltip-code-repo-${project.id}`}
+                      aria-label={`${t.githubLabel}: ${project.title} (${t.githubTooltip})`}
+                      className="btn-underline text-sm inline-flex items-center gap-2 text-white hover:text-[#4EE1A0] focus-visible:text-[#4EE1A0] transition-colors"
+                    >
+                      <IconGitHub className="w-4 h-4 text-[#4EE1A0]" />
+                      <span>{t.githubLabel}</span>
+                    </a>
+                    <span
+                      id={`tooltip-code-repo-${project.id}`}
+                      role="tooltip"
+                      className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 scale-95 group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:scale-100 transition-all duration-150 px-2.5 py-1 text-xs font-normal text-white bg-[#151515] border border-white/20 rounded shadow-xl whitespace-nowrap z-50"
+                    >
+                      {t.githubTooltip}
+                      <span
+                        className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#151515]"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+
                   <button
                     type="button"
                     onClick={handleCopyCode}
@@ -297,7 +449,7 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
                     {copied ? t.copiedSnippet : t.copySnippet}
                   </button>
                   <span className="sr-only" role="status" aria-live="polite">
-                    {copied ? t.copiedSnippet : ''}
+                    {copied ? t.copiedSnippet : ""}
                   </span>
                 </div>
               </div>
@@ -308,11 +460,16 @@ export function ProjectModal({ project, initialMode, t, onClose }: ProjectModalP
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
                 {project.highlights.map((highlight, index) => (
-                  <div key={highlight} className="bg-[#151515] p-5 border border-white/10">
+                  <div
+                    key={highlight}
+                    className="bg-[#151515] p-5 border border-white/10"
+                  >
                     <div className="text-xs font-bold tracking-[2px] text-[#4EE1A0] uppercase mb-2">
                       {t.specificationIndex(index + 1)}
                     </div>
-                    <p className="text-sm text-[#D9D9D9] leading-relaxed">{highlight}</p>
+                    <p className="text-sm text-[#D9D9D9] leading-relaxed">
+                      {highlight}
+                    </p>
                   </div>
                 ))}
               </div>

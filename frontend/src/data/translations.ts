@@ -46,6 +46,10 @@ export interface Translations {
     contactBtn: string;
     viewProject: string;
     viewCode: string;
+    tabDetails: string;
+    tabImplementation: string;
+    liveDemoLabel: string;
+    githubLabel: string;
     inspectSource: string;
     backToPortfolio: string;
     projectOverview: string;
@@ -57,6 +61,8 @@ export interface Translations {
     specificationIndex: (index: number) => string;
     tablistAria: string;
     closeModal: string;
+    liveSiteTooltip: string;
+    githubTooltip: string;
     list: TranslatedProject[];
   };
   contact: {
@@ -135,6 +141,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       contactBtn: "CONTACT ME",
       viewProject: "VIEW PROJECT",
       viewCode: "VIEW CODE",
+      tabDetails: "DETAILS",
+      tabImplementation: "IMPLEMENTATION",
+      liveDemoLabel: "LIVE DEMO",
+      githubLabel: "GITHUB",
       inspectSource: "INSPECT SOURCE",
       backToPortfolio: "BACK TO PORTFOLIO",
       projectOverview: "Project Overview",
@@ -147,6 +157,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       specificationIndex: (index: number) => `0${index}. Specification`,
       tablistAria: "Project view mode",
       closeModal: "Close modal",
+      liveSiteTooltip: "Visit live site (opens in new tab)",
+      githubTooltip: "View GitHub repository (opens in new tab)",
       list: PROJECTS_DATA,
     },
     contact: {
@@ -227,6 +239,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       contactBtn: "CONTÁCTAME",
       viewProject: "VER PROYECTO",
       viewCode: "VER CÓDIGO",
+      tabDetails: "DETALLES",
+      tabImplementation: "IMPLEMENTACIÓN",
+      liveDemoLabel: "VER DEMO",
+      githubLabel: "GITHUB",
       inspectSource: "INSPECCIONAR CÓDIGO",
       backToPortfolio: "VOLVER AL PORTAFOLIO",
       projectOverview: "Resumen del Proyecto",
@@ -239,6 +255,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       specificationIndex: (index: number) => `0${index}. Especificación`,
       tablistAria: "Modo de visualización del proyecto",
       closeModal: "Cerrar ventana modal",
+      liveSiteTooltip: "Visitar sitio en vivo (se abre en nueva pestaña)",
+      githubTooltip: "Ver repositorio en GitHub (se abre en nueva pestaña)",
       list: [
         {
           id: "link-sharing-app",
