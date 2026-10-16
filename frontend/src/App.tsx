@@ -8,16 +8,15 @@ import { HERO_PORTRAIT_IMAGE } from "./data/projects";
 import { Language, TRANSLATIONS, TranslatedProject } from "./data/translations";
 import {
   IconErrorExclamation,
-  IconFrontendMentor,
-  IconGitHub,
-  IconLinkedIn,
-  IconTwitter,
   PatternCircle,
   PatternRings,
 } from "./components/Icons";
 import { ProjectModal } from "./components/ProjectModal";
 import { DesignSystemModal } from "./components/DesignSystemModal";
 import { ScrollDrivenHeroVideo } from "./components/ScrollDrivenHeroVideo";
+import { SocialLinks } from "./components/SocialLinks";
+import { SkillsList } from "./components/SkillsList";
+import { ProjectsList } from "./components/ProjectsList";
 
 interface FormValues {
   name: string;
@@ -31,23 +30,6 @@ interface FormErrors {
   message?: string;
 }
 
-const SOCIAL_LINKS = [
-  {
-    name: "GitHub",
-    href: "https://github.com/barriedirk",
-    icon: IconGitHub,
-  },
-  {
-    name: "Frontend Mentor",
-    href: "https://www.frontendmentor.io/profile/barriedirk",
-    icon: IconFrontendMentor,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/barriefreyre/",
-    icon: IconLinkedIn,
-  },
-];
 
 export default function App() {
   const nameInputRef = useRef<HTMLInputElement | null>(null);
@@ -222,26 +204,11 @@ export default function App() {
 
           <div className="flex items-center gap-6 md:gap-8 md:pr-[30px]">
             {/* Social Media Links */}
-            <nav
-              aria-label={t.header.socialAria}
-              className="flex items-center gap-5 md:gap-6"
-            >
-              {SOCIAL_LINKS.map((item) => {
-                const IconComponent = item.icon;
-                return (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${item.name} (${t.header.opensInNewTab})`}
-                    className="text-white hover:text-[#4EE1A0] focus-visible:text-[#4EE1A0] focus-visible:outline-2 focus-visible:outline-[#4EE1A0] focus-visible:outline-offset-4 rounded-sm transition-colors duration-150"
-                  >
-                    <IconComponent className="w-5 h-5 md:w-6 md:h-6" />
-                  </a>
-                );
-              })}
-            </nav>
+            <SocialLinks
+              ariaLabel={t.header.socialAria}
+              opensInNewTabLabel={t.header.opensInNewTab}
+              className="gap-5 md:gap-6"
+            />
 
             {/* Language Switcher */}
             <div
@@ -340,18 +307,10 @@ export default function App() {
               {t.skills.sectionTitle}
             </h2>
 
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 md:gap-y-[52px] lg:gap-y-[58px] md:gap-x-6 lg:gap-x-[30px] text-center md:text-left list-none p-0">
-              {t.skills.skills.map((skill) => (
-                <li key={skill.name}>
-                  <h3 className="heading-l text-white mb-0.5 md:mb-[14px]">
-                    {skill.name}
-                  </h3>
-                  <p className="body-l text-[#D9D9D9]">
-                    {t.skills.yearsExperience(skill.years)}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <SkillsList
+              skills={t.skills.skills}
+              yearsExperience={t.skills.yearsExperience}
+            />
 
             {/* Decorative Rings Bottom-Right of Skills */}
             <PatternRings className="absolute -right-[344px] -bottom-[64px] md:-right-[332px] md:-bottom-[64px] lg:-right-[404px] lg:-bottom-[50px] z-0" />
@@ -378,76 +337,12 @@ export default function App() {
             </div>
 
             {/* Projects 2-Column Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-[60px] lg:gap-y-[69px] md:gap-x-6 lg:gap-x-[30px]">
-              {t.projects.list.map((project) => (
-                <article key={project.id} className="group flex flex-col">
-                  {/* Thumbnail Image Container (no nested button role) */}
-                  <div className="relative aspect-[540/400] w-full bg-[#242424] overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover transition-transform duration-200 ease-out lg:group-hover:scale-[1.02]"
-                    />
-
-                    {/* Desktop Hover / Focus-Within Overlay */}
-                    <div className="hidden lg:flex absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 flex-col items-center justify-center gap-12">
-                      <button
-                        type="button"
-                        onClick={() => openProjectModal(project, "preview")}
-                        aria-label={`${t.projects.viewProject}: ${project.title}`}
-                        className="btn-underline"
-                      >
-                        {t.projects.viewProject}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => openProjectModal(project, "code")}
-                        aria-label={`${t.projects.viewCode}: ${project.title}`}
-                        className="btn-underline"
-                      >
-                        {t.projects.viewCode}
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Project Title */}
-                  <h3 className="heading-m text-white uppercase mt-5">
-                    {project.title}
-                  </h3>
-
-                  {/* Project Tech Tags List */}
-                  <ul
-                    aria-label={`Technologies used in ${project.title}`}
-                    className="flex items-center gap-[18px] mt-[7px] text-[18px] leading-[28px] font-medium text-[#D9D9D9] uppercase list-none p-0"
-                  >
-                    {project.tags.map((tag) => (
-                      <li key={tag}>{tag}</li>
-                    ))}
-                  </ul>
-
-                  {/* Mobile & Tablet Permanent Action Links */}
-                  <div className="flex lg:hidden items-center gap-[30px] mt-5">
-                    <button
-                      type="button"
-                      onClick={() => openProjectModal(project, "preview")}
-                      aria-label={`${t.projects.viewProject}: ${project.title}`}
-                      className="btn-underline"
-                    >
-                      {t.projects.viewProject}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openProjectModal(project, "code")}
-                      aria-label={`${t.projects.viewCode}: ${project.title}`}
-                      className="btn-underline"
-                    >
-                      {t.projects.viewCode}
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <ProjectsList
+              projects={t.projects.list}
+              viewProjectText={t.projects.viewProject}
+              viewCodeText={t.projects.viewCode}
+              onOpenModal={openProjectModal}
+            />
           </section>
 
           {/* CONTACT SECTION */}
@@ -655,26 +550,11 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-6 md:gap-8">
-              <nav
-                aria-label={t.footer.socialAria}
-                className="flex items-center gap-6 md:gap-8"
-              >
-                {SOCIAL_LINKS.map((item) => {
-                  const IconComponent = item.icon;
-                  return (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${item.name} (${t.header.opensInNewTab})`}
-                      className="text-white hover:text-[#4EE1A0] focus-visible:text-[#4EE1A0] focus-visible:outline-2 focus-visible:outline-[#4EE1A0] focus-visible:outline-offset-4 rounded-sm transition-colors duration-150"
-                    >
-                      <IconComponent className="w-5 h-5 md:w-6 md:h-6" />
-                    </a>
-                  );
-                })}
-              </nav>
+              <SocialLinks
+                ariaLabel={t.footer.socialAria}
+                opensInNewTabLabel={t.header.opensInNewTab}
+                className="gap-6 md:gap-8"
+              />
 
               {/* Footer Language Switcher */}
               <div
