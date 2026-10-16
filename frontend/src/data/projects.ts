@@ -30,142 +30,292 @@ export const SKILLS_DATA: SkillItem[] = [
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
-    id: "design-portfolio",
-    title: "DESIGN PORTFOLIO",
-    tags: ["HTML", "CSS"],
-    image: "/src/assets/images/project_design_portfolio_1791778824064.jpg",
+    id: "link-sharing-app",
+    title: "LINK-SHARING APP",
+    tags: ["REACT", "EXPRESS", "POSTGRESQL", "NX"],
+    image: "/src/assets/images/project_link_sharing_app.jpg",
     summary:
-      "A single-page responsive design portfolio featuring an asymmetric CSS Grid bento layout for multi-disciplinary disciplines and an interactive work carousel.",
+      "Full-stack link-sharing platform built in an Nx monorepo featuring real-time live preview mockups, drag-and-drop link reordering, JWT authentication, and PostgreSQL persistence.",
     highlights: [
-      "CSS Grid template areas adapting seamlessly across Mobile, Tablet, and Desktop breakpoints",
-      "Accessible keyboard-navigable image slider with smooth hardware-accelerated transitions",
-      "Fluid typography scale using CSS clamp() and custom properties",
+      "Nx monorepo orchestrating React 19, Express REST API, and shared TypeScript validation schemas",
+      "Interactive mobile phone preview synced in real-time with form state and dynamic link validation",
+      "Comprehensive testing suite spanning Vitest unit tests and Cypress E2E flows",
     ],
-    liveUrl:
-      "https://www.frontendmentor.io/challenges/singlepage-design-portfolio-2MMhyhfKVo",
-    repoUrl: "https://github.com/adamkeyes/single-page-design-portfolio",
-    codeSnippet: `.skills-bento {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1.5rem;
-}
-.card-graphic-design {
-  grid-column: span 2;
-  grid-row: span 2;
-  background-color: #755CDE;
+    liveUrl: "https://link-sharing-frontend.onrender.com/#/login",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-38-link-sharing-app",
+    codeSnippet: `export function useLinkReorder(links: Link[], onReorder: (links: Link[]) => void) {
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    const items = Array.from(links);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    onReorder(items.map((item, idx) => ({ ...item, order: idx })));
+  };
+  return { handleDragEnd };
 }`,
   },
   {
-    id: "e-learning-landing-page",
-    title: "E-LEARNING LANDING PAGE",
-    tags: ["HTML", "CSS"],
-    image: "/src/assets/images/project_elearning_landing_1791778833605.jpg",
+    id: "kanban-task-management",
+    title: "KANBAN TASK MANAGEMENT",
+    tags: ["NEXT.JS", "STRAPI", "ZUSTAND", "REACT HOOK FORM"],
+    image: "/src/assets/images/project_kanban_task_management_web_app.jpg",
     summary:
-      "Responsive marketing landing page for Skilled E-Learning with custom gradient cards, overlapping SVG badges, and high-conversion call-to-action states.",
+      "Fully responsive multi-board Kanban application with Strapi headless CMS backend, Zustand state management, subtask completion tracking, and dark/light themes.",
     highlights: [
-      "Responsive art-directed hero imagery with overlapping statistic callouts",
-      "Equal-height CSS Grid course cards with floating top-offset category icons",
-      "WCAG AA compliant contrast across gradient interactive buttons",
+      "Dynamic multi-column board workflow with optimistic state updates powered by Zustand",
+      "Robust form validation for boards, columns, and subtasks using React Hook Form and Zod",
+      "Headless CMS integration via Strapi REST API with persisted custom board hierarchies",
     ],
-    liveUrl:
-      "https://www.frontendmentor.io/challenges/skilled-elearning-landing-page-S1ObDrZ8q",
-    repoUrl: "https://github.com/adamkeyes/skilled-elearning-landing-page",
-    codeSnippet: `.course-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  row-gap: 5rem;
-  column-gap: 1.875rem;
-}
-.btn-gradient-primary {
-  background: linear-gradient(180deg, #FF6F48 0%, #F02AA6 100%);
+    liveUrl: "https://frontend-mentor-exercise-41-kanban.vercel.app/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-41-kanban-task-management-web-app",
+    codeSnippet: `export const useKanbanStore = create<KanbanState>((set) => ({
+  boards: [],
+  activeBoardId: null,
+  moveTask: (taskId, sourceColId, targetColId, newIndex) =>
+    set((state) => {
+      const activeBoard = state.boards.find((b) => b.id === state.activeBoardId);
+      if (!activeBoard) return state;
+      const updatedColumns = transferTask(activeBoard.columns, taskId, sourceColId, targetColId, newIndex);
+      return { boards: updateBoardColumns(state.boards, activeBoard.id, updatedColumns) };
+    }),
+}));`,
+  },
+  {
+    id: "audiophile-ecommerce",
+    title: "AUDIOPHILE E-COMMERCE",
+    tags: ["NEXT.JS", "REACT", "TAILWIND CSS", "STORYBOOK"],
+    image: "/src/assets/images/project_audiophile_ecommerce_website.jpg",
+    summary:
+      "High-end multi-page audio gear e-commerce store built with Next.js, Tailwind CSS, persistent shopping cart drawer, and isolated UI component development in Storybook.",
+    highlights: [
+      "Modular UI design system documented and tested in Storybook with full accessibility support",
+      "Persistent shopping cart state handling dynamic quantities, VAT calculations, and checkout modal",
+      "Art-directed responsive picture elements ensuring optimal image fidelity across all devices",
+    ],
+    liveUrl: "https://audiophile-e-commerce-website-web-a.vercel.app/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-42-audiophile-e-commerce-website",
+    codeSnippet: `export function CartSummary({ items, shipping = 50 }: CartSummaryProps) {
+  const subtotal = useMemo(() => items.reduce((acc, i) => acc + i.price * i.quantity, 0), [items]);
+  const vat = Math.round(subtotal * 0.2);
+  const grandTotal = subtotal + shipping;
+
+  return (
+    <div className="flex flex-col gap-2 p-6 bg-neutral-900 rounded-lg text-white">
+      <div className="flex justify-between text-neutral-400"><span>TOTAL</span><span>$ {subtotal.toLocaleString()}</span></div>
+      <div className="flex justify-between text-neutral-400"><span>VAT (INCLUDED)</span><span>$ {vat.toLocaleString()}</span></div>
+      <div className="flex justify-between font-bold text-accent mt-4"><span>GRAND TOTAL</span><span>$ {grandTotal.toLocaleString()}</span></div>
+    </div>
+  );
 }`,
   },
   {
-    id: "todo-web-app",
-    title: "TODO WEB APP",
-    tags: ["HTML", "CSS", "JAVASCRIPT"],
-    image: "/src/assets/images/project_todo_webapp_1791778842944.jpg",
+    id: "currency-converter",
+    title: "FOREIGN EXCHANGE CONVERTER",
+    tags: ["NEXT.JS", "REACT", "ZUSTAND", "TAILWIND CSS"],
+    image: "/src/assets/images/project_foreign_exchange_currency_converter.jpg",
     summary:
-      "Feature-complete task management web application with drag-and-drop list reordering, real-time status filtering (All, Active, Completed), and theme switching.",
+      "Modern multi-currency exchange rate application with internationalization (i18n), real-time conversion calculator, historical rate charts, and Zustand state caching.",
     highlights: [
-      "Drag-and-drop reordering with keyboard accessibility and persistent state",
-      "Instant filtering between All, Active, and Completed tasks with live counter",
-      "Dark and light theme engine backed by CSS custom properties",
+      "Multi-language routing and localization (/en, /es) built directly on Next.js",
+      "Axios API client with response caching, debounced rate conversions, and resilient error recovery",
+      "Interactive charts comparing currency fluctuations over 30, 90, and 365-day timeframes",
     ],
-    liveUrl: "https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW",
-    repoUrl: "https://github.com/adamkeyes/todo-web-app",
-    codeSnippet: `function filterTasks(tasks, status) {
-  if (status === 'active') return tasks.filter(t => !t.completed);
-  if (status === 'completed') return tasks.filter(t => t.completed);
-  return tasks;
+    liveUrl:
+      "https://foreign-exchange-currency-converter-eta.vercel.app/en",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-44-foreign-exchange-currency-converter",
+    codeSnippet: `export async function convertCurrency(amount: number, from: string, to: string): Promise<ConversionResult> {
+  const { data } = await apiClient.get<RateResponse>(\`/latest?from=\${from}&to=\${to}\`);
+  const rate = data.rates[to];
+  const converted = Number((amount * rate).toFixed(4));
+  return { amount, from, to, rate, result: converted, timestamp: Date.now() };
+}`,
+  },
+  {
+    id: "galleria-slideshow",
+    title: "GALLERIA SLIDESHOW SITE",
+    tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
+    image: "/src/assets/images/project_art_gallery.jpg",
+    summary:
+      "High-performance editorial masonry art gallery built with Astro and Tailwind CSS, featuring an automated fullscreen slideshow player and interactive painting lightbox.",
+    highlights: [
+      "Astro Island architecture delivering zero-JS baseline page load and blisteringly fast paint times",
+      "CSS columns masonry grid presenting historical fine art in uncropped original aspect ratios",
+      "Full keyboard slideshow controller (Space, Arrow keys) with persistent playback progress bar",
+    ],
+    liveUrl:
+      "https://barriedirk.github.io/frontend-mentor-exercise-27-galleria-slideshow-site/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-27-galleria-slideshow-site",
+    codeSnippet: `---
+import { paintings } from '../data/artworks';
+const { currentSlideIndex = 0 } = Astro.props;
+const current = paintings[currentSlideIndex];
+const progressPercentage = ((currentSlideIndex + 1) / paintings.length) * 100;
+---
+<div class="slideshow-hud flex items-center justify-between border-t border-neutral-200 p-6">
+  <div>
+    <h2 class="font-bold text-lg text-black">{current.name}</h2>
+    <p class="text-sm text-neutral-500">{current.artist.name}</p>
+  </div>
+  <div class="h-1 bg-neutral-200 fixed bottom-0 left-0 right-0">
+    <div class="h-full bg-black transition-all duration-300" style={\`width: \${progressPercentage}%\`} />
+  </div>
+</div>`,
+  },
+  {
+    id: "pomodoro-app",
+    title: "POMODORO APP",
+    tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
+    image: "/src/assets/images/project_pomodoro.jpg",
+    summary:
+      "Customizable Pomodoro productivity timer built in Astro and Tailwind CSS with configurable intervals (pomodoro, short break, long break), circular SVG timer, and theme customization.",
+    highlights: [
+      "Precise web worker countdown loop preventing browser tab throttling and time drifts",
+      "Dynamic SVG stroke-dashoffset circle animation calculating remaining percentage in real time",
+      "User preferences modal allowing font selection (Sans, Serif, Mono) and custom accent colors",
+    ],
+    liveUrl:
+      "https://barriedirk.github.io/frontend-mentor-exercise-28-pomodoro-app/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-28-pomodoro-app",
+    codeSnippet: `export function calculateSvgProgress(secondsLeft: number, totalSeconds: number, radius = 120): number {
+  const circumference = 2 * Math.PI * radius;
+  const progressRatio = secondsLeft / totalSeconds;
+  return circumference * (1 - progressRatio);
+}`,
+  },
+  {
+    id: "space-tourism-website",
+    title: "SPACE TOURISM WEBSITE",
+    tags: ["ASTRO", "TAILWIND CSS"],
+    image: "/src/assets/images/project_space_tourism_multi_page_website.jpg",
+    summary:
+      "Immersive multi-page astronomy and space tourism web experience with interactive tabs for destinations, crew members, and space flight launch technologies.",
+    highlights: [
+      "Accessible tablist and tabpanel implementation with complete keyboard navigation (WAI-ARIA)",
+      "Responsive design switching between horizontal tabs, dots pagination, and numbered button selectors",
+      "Astro content-driven architecture rendering optimized modern image formats (AVIF/WebP)",
+    ],
+    liveUrl:
+      "https://barriedirk.github.io/frontend-mentor-exercise-26-space-tourism-multi-page-website/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-26-space-tourism-multi-page-website",
+    codeSnippet: `---
+import Layout from '../layouts/Layout.astro';
+import destinations from '../data/destinations.json';
+const { destination = destinations[0] } = Astro.props;
+---
+<main class="destination-page min-h-screen bg-space-dark text-white px-6 md:px-24 py-12">
+  <h1 class="font-barlow-condensed uppercase tracking-widest text-lg md:text-2xl text-neutral-400">
+    <span class="font-bold text-neutral-600 mr-4">01</span> Pick your destination
+  </h1>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-12">
+    <img src={destination.images.webp} alt={destination.name} class="mx-auto w-64 md:w-96 animate-spin-slow" />
+    <article>
+      <h2 class="font-bellefair text-7xl uppercase">{destination.name}</h2>
+      <p class="font-barlow text-neutral-300 leading-relaxed mt-4">{destination.description}</p>
+    </article>
+  </div>
+</main>`,
+  },
+  {
+    id: "tic-tac-toe-game",
+    title: "TIC TAC TOE GAME",
+    tags: ["JAVASCRIPT", "CSS", "LOCALSTORAGE"],
+    image: "/src/assets/images/project_tic_tac_toe_game.jpg",
+    summary:
+      "Classic Tic-Tac-Toe game created with pure vanilla JavaScript and CSS, featuring a Redux-inspired unidirectional state manager, invincible Minimax AI CPU mode, and local score persistence.",
+    highlights: [
+      "Minimax decision tree AI algorithm ensuring challenging, unbeatable CPU difficulty",
+      "Unidirectional state flow (action -> reducer -> render) implemented entirely in vanilla ES6+",
+      "Turn-by-turn keyboard navigation and screen reader live score updates",
+    ],
+    liveUrl:
+      "https://barriedirk.github.io/frontend-mentor-exercise-21-tic-tac-toe-game/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-21-tic-tac-toe-game",
+    codeSnippet: `function minimax(board, depth, isMaximizing) {
+  const winner = checkWinner(board);
+  if (winner === 'O') return 10 - depth;
+  if (winner === 'X') return depth - 10;
+  if (board.every(cell => cell !== null)) return 0;
+
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (board[i] === null) {
+        board[i] = 'O';
+        bestScore = Math.max(bestScore, minimax(board, depth + 1, false));
+        board[i] = null;
+      }
+    }
+    return bestScore;
+  }
 }`,
   },
   {
     id: "entertainment-web-app",
     title: "ENTERTAINMENT WEB APP",
-    tags: ["HTML", "CSS", "JAVASCRIPT"],
-    image: "/src/assets/images/project_entertainment_webapp_1791778852150.jpg",
+    tags: ["REACT", "REDUX", "TAILWIND CSS", "REACT ROUTER"],
+    image: "/src/assets/images/project_entertainment_web_app.jpg",
     summary:
-      "Multi-view streaming catalog application featuring horizontal trending rails, instant search across movies and TV series, and interactive bookmarking.",
+      "Multi-page streaming catalog entertainment app built with React and Redux, featuring real-time debounced title search across movies & TV series, category filtering, and bookmarked media lists.",
     highlights: [
-      "Real-time search filtering across Movies, TV Series, and Bookmarked views",
-      "Horizontal snap-scrolling Trending rail with hover play overlays",
-      "Optimistic bookmark toggle state with accessible ARIA live announcements",
+      "Redux Toolkit slice managing bookmark toggling with local storage synchronization",
+      "Accessible keyboard-navigable card rails and responsive CSS grid for seamless browsing",
+      "Debounced dynamic search filter updating results smoothly without layout shifts",
     ],
     liveUrl:
-      "https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X",
-    repoUrl: "https://github.com/adamkeyes/entertainment-web-app",
-    codeSnippet: `const filteredCatalog = catalog.filter(item => {
-  const matchesCategory = activeTab === 'all' || item.category === activeTab;
-  const matchesQuery = item.title.toLowerCase().includes(query.toLowerCase());
-  return matchesCategory && matchesQuery;
+      "https://barriedirk.github.io/frontend-mentor-exercise-34-entertainment-web-app/#/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-34-entertainment-web-app",
+    codeSnippet: `export const entertainmentSlice = createSlice({
+  name: 'entertainment',
+  initialState,
+  reducers: {
+    toggleBookmark: (state, action: PayloadAction<string>) => {
+      const item = state.media.find(m => m.id === action.payload);
+      if (item) {
+        item.isBookmarked = !item.isBookmarked;
+        saveBookmarksToStorage(state.media.filter(m => m.isBookmarked).map(m => m.id));
+      }
+    },
+  },
 });`,
   },
   {
     id: "memory-game",
     title: "MEMORY GAME",
-    tags: ["HTML", "CSS", "JAVASCRIPT"],
-    image: "/src/assets/images/project_memory_game_1791778861130.jpg",
+    tags: ["ANGULAR", "NGRX", "RXJS", "SCSS"],
+    image: "/src/assets/images/project_memory_game.jpg",
     summary:
-      "Interactive memory matching game supporting both 4x4 and 6x6 grid sizes, custom icon or number tokens, solo timer mode, and up to 4-player turn tracking.",
+      "Feature-packed memory matching game built in Angular with NgRx state management, RxJS streams, configurable grid sizes (4x4, 6x6), icon or number tokens, and 1 to 4 multiplayer turn tracking.",
     highlights: [
-      "Configurable 4x4 or 6x6 board generator using Fisher-Yates shuffle algorithm",
-      "Multiplayer turn state machine tracking moves, pairs matched, and tie-breakers",
-      "Zero-latency token flip animations and full keyboard grid navigation",
-    ],
-    liveUrl: "https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM",
-    repoUrl: "https://github.com/adamkeyes/memory-game",
-    codeSnippet: `function shuffleTokens(tokens) {
-  const copy = [...tokens, ...tokens];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}`,
-  },
-  {
-    id: "art-gallery-showcase",
-    title: "ART GALLERY SHOWCASE",
-    tags: ["HTML", "CSS", "JAVASCRIPT"],
-    image: "/src/assets/images/project_art_gallery_1791778870286.jpg",
-    summary:
-      'Editorial masonry art gallery experience ("galleria.") with an interactive slideshow player, progress indicator bar, and high-resolution painting lightbox.',
-    highlights: [
-      "Masonry grid layout celebrating historical fine art proportions without cropping",
-      "Interactive slideshow controller with keyboard arrow navigation and progress bar",
-      "High-resolution modal lightbox viewer for inspecting brushwork details",
+      "NgRx reactive state machine orchestrating multiplayer turn rotations, pairs discovered, and tiebreakers",
+      "RxJS timer streams powering accurate solo countdowns and move counters",
+      "Hardware-accelerated 3D card flip animations built with modular SCSS transitions",
     ],
     liveUrl:
-      "https://www.frontendmentor.io/challenges/galleria-slideshow-site-tEA4pwsa6",
-    repoUrl: "https://github.com/adamkeyes/galleria-slideshow-site",
-    codeSnippet: `.masonry-gallery {
-  columns: 4 280px;
-  column-gap: 2.5rem;
-}
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 2.5rem;
+      "https://barriedirk.github.io/frontend-mentor-exercise-33-memory-game/#/",
+    repoUrl:
+      "https://github.com/barriedirk/frontend-mentor-exercise-33-memory-game",
+    codeSnippet: `@Component({
+  selector: 'app-memory-board',
+  templateUrl: './memory-board.component.html',
+  styleUrls: ['./memory-board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MemoryBoardComponent {
+  cards$ = this.store.select(selectCards);
+  isLocked$ = this.store.select(selectIsBoardLocked);
+
+  onCardClick(cardIndex: number): void {
+    this.store.dispatch(MemoryActions.flipCard({ cardIndex }));
+  }
 }`,
   },
 ];

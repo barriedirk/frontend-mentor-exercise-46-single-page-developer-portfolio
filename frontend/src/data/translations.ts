@@ -1,3 +1,5 @@
+import { PROJECTS_DATA } from "./projects";
+
 export type Language = "en" | "es";
 
 export interface TranslatedProject {
@@ -145,153 +147,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       specificationIndex: (index: number) => `0${index}. Specification`,
       tablistAria: "Project view mode",
       closeModal: "Close modal",
-      list: [
-        {
-          id: "design-portfolio",
-          title: "DESIGN PORTFOLIO",
-          tags: ["HTML", "CSS"],
-          image:
-            "/src/assets/images/project_design_portfolio_1791778824064.jpg",
-          summary:
-            "A single-page responsive design portfolio featuring an asymmetric CSS Grid bento layout for multi-disciplinary disciplines and an interactive work carousel.",
-          highlights: [
-            "CSS Grid template areas adapting seamlessly across Mobile, Tablet, and Desktop breakpoints",
-            "Accessible keyboard-navigable image slider with smooth hardware-accelerated transitions",
-            "Fluid typography scale using CSS clamp() and custom properties",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/singlepage-design-portfolio-2MMhyhfKVo",
-          repoUrl: "https://github.com/adamkeyes/single-page-design-portfolio",
-          codeSnippet: `.skills-bento {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1.5rem;
-}
-.card-graphic-design {
-  grid-column: span 2;
-  grid-row: span 2;
-  background-color: #755CDE;
-}`,
-        },
-        {
-          id: "e-learning-landing-page",
-          title: "E-LEARNING LANDING PAGE",
-          tags: ["HTML", "CSS"],
-          image:
-            "/src/assets/images/project_elearning_landing_1791778833605.jpg",
-          summary:
-            "Responsive marketing landing page for Skilled E-Learning with custom gradient cards, overlapping SVG badges, and high-conversion call-to-action states.",
-          highlights: [
-            "Responsive art-directed hero imagery with overlapping statistic callouts",
-            "Equal-height CSS Grid course cards with floating top-offset category icons",
-            "WCAG AA compliant contrast across gradient interactive buttons",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/skilled-elearning-landing-page-S1ObDrZ8q",
-          repoUrl:
-            "https://github.com/adamkeyes/skilled-elearning-landing-page",
-          codeSnippet: `.course-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  row-gap: 5rem;
-  column-gap: 1.875rem;
-}
-.btn-gradient-primary {
-  background: linear-gradient(180deg, #FF6F48 0%, #F02AA6 100%);
-}`,
-        },
-        {
-          id: "todo-web-app",
-          title: "TODO WEB APP",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image: "/src/assets/images/project_todo_webapp_1791778842944.jpg",
-          summary:
-            "Feature-complete task management web application with drag-and-drop list reordering, real-time status filtering (All, Active, Completed), and theme switching.",
-          highlights: [
-            "Drag-and-drop reordering with keyboard accessibility and persistent state",
-            "Instant filtering between All, Active, and Completed tasks with live counter",
-            "Dark and light theme engine backed by CSS custom properties",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW",
-          repoUrl: "https://github.com/adamkeyes/todo-web-app",
-          codeSnippet: `function filterTasks(tasks, status) {
-  if (status === 'active') return tasks.filter(t => !t.completed);
-  if (status === 'completed') return tasks.filter(t => t.completed);
-  return tasks;
-}`,
-        },
-        {
-          id: "entertainment-web-app",
-          title: "ENTERTAINMENT WEB APP",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image:
-            "/src/assets/images/project_entertainment_webapp_1791778852150.jpg",
-          summary:
-            "Multi-view streaming catalog application featuring horizontal trending rails, instant search across movies and TV series, and interactive bookmarking.",
-          highlights: [
-            "Real-time search filtering across Movies, TV Series, and Bookmarked views",
-            "Horizontal snap-scrolling Trending rail with hover play overlays",
-            "Optimistic bookmark toggle state with accessible ARIA live announcements",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X",
-          repoUrl: "https://github.com/adamkeyes/entertainment-web-app",
-          codeSnippet: `const filteredCatalog = catalog.filter(item => {
-  const matchesCategory = activeTab === 'all' || item.category === activeTab;
-  const matchesQuery = item.title.toLowerCase().includes(query.toLowerCase());
-  return matchesCategory && matchesQuery;
-});`,
-        },
-        {
-          id: "memory-game",
-          title: "MEMORY GAME",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image: "/src/assets/images/project_memory_game_1791778861130.jpg",
-          summary:
-            "Interactive memory matching game supporting both 4x4 and 6x6 grid sizes, custom icon or number tokens, solo timer mode, and up to 4-player turn tracking.",
-          highlights: [
-            "Configurable 4x4 or 6x6 board generator using Fisher-Yates shuffle algorithm",
-            "Multiplayer turn state machine tracking moves, pairs matched, and tie-breakers",
-            "Zero-latency token flip animations and full keyboard grid navigation",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM",
-          repoUrl: "https://github.com/adamkeyes/memory-game",
-          codeSnippet: `function shuffleTokens(tokens) {
-  const copy = [...tokens, ...tokens];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}`,
-        },
-        {
-          id: "art-gallery-showcase",
-          title: "ART GALLERY SHOWCASE",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image: "/src/assets/images/project_art_gallery_1791778870286.jpg",
-          summary:
-            'Editorial masonry art gallery experience ("galleria.") with an interactive slideshow player, progress indicator bar, and high-resolution painting lightbox.',
-          highlights: [
-            "Masonry grid layout celebrating historical fine art proportions without cropping",
-            "Interactive slideshow controller with keyboard arrow navigation and progress bar",
-            "High-resolution modal lightbox viewer for inspecting brushwork details",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/galleria-slideshow-site-tEA4pwsa6",
-          repoUrl: "https://github.com/adamkeyes/galleria-slideshow-site",
-          codeSnippet: `.masonry-gallery {
-  columns: 4 280px;
-  column-gap: 2.5rem;
-}
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 2.5rem;
-}`,
-        },
-      ],
+      list: PROJECTS_DATA,
     },
     contact: {
       title: "Contact",
@@ -385,148 +241,294 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       closeModal: "Cerrar ventana modal",
       list: [
         {
-          id: "design-portfolio",
-          title: "PORTAFOLIO DE DISEÑO",
-          tags: ["HTML", "CSS"],
-          image:
-            "/src/assets/images/project_design_portfolio_1791778824064.jpg",
+          id: "link-sharing-app",
+          title: "LINK-SHARING APP",
+          tags: ["REACT", "EXPRESS", "POSTGRESQL", "NX"],
+          image: "/src/assets/images/project_link_sharing_app.jpg",
           summary:
-            "Portafolio responsivo de diseño de una sola página que integra un diseño asimétrico tipo Bento en CSS Grid para disciplinas creativas y un carrusel interactivo.",
+            "Plataforma full-stack para compartir enlaces construida en un monorepositorio Nx, con vista previa interactiva en dispositivo móvil en tiempo real, reordenamiento drag-and-drop, autenticación JWT y persistencia en PostgreSQL.",
           highlights: [
-            "Áreas de plantilla en CSS Grid adaptadas perfectamente para móvil, tableta y escritorio",
-            "Deslizador de imágenes accesible por teclado con transiciones aceleradas por hardware",
-            "Escala tipográfica fluida mediante funciones CSS clamp() y propiedades personalizadas",
+            "Monorepositorio Nx que orquesta React 19, API REST en Express y esquemas de validación compartidos en TypeScript",
+            "Vista previa interactiva en maqueta de móvil sincronizada en tiempo real con validación dinámica de enlaces",
+            "Conjunto exhaustivo de pruebas con tests unitarios en Vitest y flujos E2E en Cypress",
           ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/singlepage-design-portfolio-2MMhyhfKVo",
-          repoUrl: "https://github.com/adamkeyes/single-page-design-portfolio",
-          codeSnippet: `.skills-bento {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1.5rem;
-}
-.card-graphic-design {
-  grid-column: span 2;
-  grid-row: span 2;
-  background-color: #755CDE;
-}`,
-        },
-        {
-          id: "e-learning-landing-page",
-          title: "PÁGINA E-LEARNING",
-          tags: ["HTML", "CSS"],
-          image:
-            "/src/assets/images/project_elearning_landing_1791778833605.jpg",
-          summary:
-            "Página de aterrizaje responsiva para la plataforma Skilled E-Learning con tarjetas de degradados vibrantes, distintivos SVG superpuestos y llamadas a la acción de alta conversión.",
-          highlights: [
-            "Diseño de imagen héroe con dirección de arte responsiva y tarjetas de estadísticas flotantes",
-            "Cuadrícula CSS Grid de cursos con altura homogénea e iconos desplazados hacia arriba",
-            "Contraste conforme a WCAG AA en todos los botones y degradados interactivos",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/skilled-elearning-landing-page-S1ObDrZ8q",
+          liveUrl: "https://link-sharing-frontend.onrender.com/#/login",
           repoUrl:
-            "https://github.com/adamkeyes/skilled-elearning-landing-page",
-          codeSnippet: `.course-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  row-gap: 5rem;
-  column-gap: 1.875rem;
-}
-.btn-gradient-primary {
-  background: linear-gradient(180deg, #FF6F48 0%, #F02AA6 100%);
+            "https://github.com/barriedirk/frontend-mentor-exercise-38-link-sharing-app",
+          codeSnippet: `export function useLinkReorder(links: Link[], onReorder: (links: Link[]) => void) {
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    const items = Array.from(links);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    onReorder(items.map((item, idx) => ({ ...item, order: idx })));
+  };
+  return { handleDragEnd };
 }`,
         },
         {
-          id: "todo-web-app",
-          title: "APLICACIÓN TODO",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image: "/src/assets/images/project_todo_webapp_1791778842944.jpg",
+          id: "kanban-task-management",
+          title: "GESTIÓN DE TAREAS KANBAN",
+          tags: ["NEXT.JS", "STRAPI", "ZUSTAND", "REACT HOOK FORM"],
+          image: "/src/assets/images/project_kanban_task_management_web_app.jpg",
           summary:
-            "Aplicación web completa de gestión de tareas con reordenamiento por arrastrar y soltar (drag and drop), filtros de estado en tiempo real (Todas, Activas, Completadas) y cambio de tema.",
+            "Aplicación Kanban responsiva con múltiples tableros conectada a un CMS headless Strapi, gestión de estado reactiva con Zustand, seguimiento de subtareas y temas claro/oscuro.",
           highlights: [
-            "Reordenamiento por arrastre accesible mediante teclado y sincronización de estado",
-            "Filtrado instantáneo entre tareas activas y finalizadas con contador dinámico",
-            "Motor de modo claro y oscuro sustentado en variables CSS",
+            "Flujo de trabajo multi-columna con actualizaciones optimistas de estado mediante Zustand",
+            "Validación robusta de formularios para tableros, columnas y subtareas con React Hook Form y Zod",
+            "Integración con CMS headless Strapi REST API con jerarquías personalizadas de tableros persistentes",
+          ],
+          liveUrl: "https://frontend-mentor-exercise-41-kanban.vercel.app/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-41-kanban-task-management-web-app",
+          codeSnippet: `export const useKanbanStore = create<KanbanState>((set) => ({
+  boards: [],
+  activeBoardId: null,
+  moveTask: (taskId, sourceColId, targetColId, newIndex) =>
+    set((state) => {
+      const activeBoard = state.boards.find((b) => b.id === state.activeBoardId);
+      if (!activeBoard) return state;
+      const updatedColumns = transferTask(activeBoard.columns, taskId, sourceColId, targetColId, newIndex);
+      return { boards: updateBoardColumns(state.boards, activeBoard.id, updatedColumns) };
+    }),
+}));`,
+        },
+        {
+          id: "audiophile-ecommerce",
+          title: "TIENDA E-COMMERCE AUDIOPHILE",
+          tags: ["NEXT.JS", "REACT", "TAILWIND CSS", "STORYBOOK"],
+          image: "/src/assets/images/project_audiophile_ecommerce_website.jpg",
+          summary:
+            "Tienda e-commerce multi-página para equipos de audio de alta fidelidad construida con Next.js, Tailwind CSS, carrito de compras persistente y catálogo de componentes en Storybook.",
+          highlights: [
+            "Sistema de diseño modular documentado y probado en Storybook con soporte integral de accesibilidad",
+            "Carrito de compras persistente con cálculo de impuestos (VAT), cantidades dinámicas y modal de checkout",
+            "Elementos picture responsivos con dirección de arte para garantizar máxima fidelidad visual",
+          ],
+          liveUrl: "https://audiophile-e-commerce-website-web-a.vercel.app/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-42-audiophile-e-commerce-website",
+          codeSnippet: `export function CartSummary({ items, shipping = 50 }: CartSummaryProps) {
+  const subtotal = useMemo(() => items.reduce((acc, i) => acc + i.price * i.quantity, 0), [items]);
+  const vat = Math.round(subtotal * 0.2);
+  const grandTotal = subtotal + shipping;
+
+  return (
+    <div className="flex flex-col gap-2 p-6 bg-neutral-900 rounded-lg text-white">
+      <div className="flex justify-between text-neutral-400"><span>TOTAL</span><span>$ {subtotal.toLocaleString()}</span></div>
+      <div className="flex justify-between text-neutral-400"><span>VAT (INCLUDED)</span><span>$ {vat.toLocaleString()}</span></div>
+      <div className="flex justify-between font-bold text-accent mt-4"><span>GRAND TOTAL</span><span>$ {grandTotal.toLocaleString()}</span></div>
+    </div>
+  );
+}`,
+        },
+        {
+          id: "currency-converter",
+          title: "CONVERSOR DE DIVISAS",
+          tags: ["NEXT.JS", "REACT", "ZUSTAND", "TAILWIND CSS"],
+          image:
+            "/src/assets/images/project_foreign_exchange_currency_converter.jpg",
+          summary:
+            "Aplicación moderna de cambio de divisas con soporte de internacionalización (i18n), calculadora de conversión en tiempo real, gráficos de tasas históricas y caché de estado con Zustand.",
+          highlights: [
+            "Enrutamiento multi-idioma y localización (/en, /es) implementado directamente en Next.js",
+            "Cliente API con Axios que implementa caché, conversiones con debounce y recuperación resiliente de errores",
+            "Gráficos interactivos para comparar fluctuaciones de tasas en periodos de 30, 90 y 365 días",
           ],
           liveUrl:
-            "https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW",
-          repoUrl: "https://github.com/adamkeyes/todo-web-app",
-          codeSnippet: `function filterTasks(tasks, status) {
-  if (status === 'active') return tasks.filter(t => !t.completed);
-  if (status === 'completed') return tasks.filter(t => t.completed);
-  return tasks;
+            "https://foreign-exchange-currency-converter-eta.vercel.app/en",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-44-foreign-exchange-currency-converter",
+          codeSnippet: `export async function convertCurrency(amount: number, from: string, to: string): Promise<ConversionResult> {
+  const { data } = await apiClient.get<RateResponse>(\`/latest?from=\${from}&to=\${to}\`);
+  const rate = data.rates[to];
+  const converted = Number((amount * rate).toFixed(4));
+  return { amount, from, to, rate, result: converted, timestamp: Date.now() };
+}`,
+        },
+        {
+          id: "galleria-slideshow",
+          title: "GALERÍA DE ARTE SLIDESHOW",
+          tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
+          image: "/src/assets/images/project_art_gallery.jpg",
+          summary:
+            "Galería de arte editorial con diseño Masonry de alto rendimiento construida con Astro y Tailwind CSS, con reproductor de diapositivas a pantalla completa y visor modal lightbox.",
+          highlights: [
+            "Arquitectura de islas Astro que ofrece carga inicial ultrarrápida sin sobrecarga innecesaria de JavaScript",
+            "Cuadrícula masonry con columnas CSS que preserva las proporciones originales de cada obra pictórica",
+            "Controlador de presentaciones accesible por teclado con barra de progreso fluida",
+          ],
+          liveUrl:
+            "https://barriedirk.github.io/frontend-mentor-exercise-27-galleria-slideshow-site/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-27-galleria-slideshow-site",
+          codeSnippet: `---
+import { paintings } from '../data/artworks';
+const { currentSlideIndex = 0 } = Astro.props;
+const current = paintings[currentSlideIndex];
+const progressPercentage = ((currentSlideIndex + 1) / paintings.length) * 100;
+---
+<div class="slideshow-hud flex items-center justify-between border-t border-neutral-200 p-6">
+  <div>
+    <h2 class="font-bold text-lg text-black">{current.name}</h2>
+    <p class="text-sm text-neutral-500">{current.artist.name}</p>
+  </div>
+  <div class="h-1 bg-neutral-200 fixed bottom-0 left-0 right-0">
+    <div class="h-full bg-black transition-all duration-300" style={\`width: \${progressPercentage}%\`} />
+  </div>
+</div>`,
+        },
+        {
+          id: "pomodoro-app",
+          title: "APLICACIÓN POMODORO",
+          tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
+          image: "/src/assets/images/project_pomodoro.jpg",
+          summary:
+            "Temporizador de productividad Pomodoro personalizable en Astro y Tailwind CSS con intervalos configurables, reloj circular SVG con cuenta regresiva y personalización de temas y fuentes.",
+          highlights: [
+            "Bucle de cuenta regresiva con web worker para evitar desaceleración del temporizador en pestañas inactivas",
+            "Animación circular SVG con stroke-dashoffset calculando el porcentaje restante en tiempo real",
+            "Modal de preferencias para seleccionar tipografía (Sans, Serif, Mono) y colores de énfasis",
+          ],
+          liveUrl:
+            "https://barriedirk.github.io/frontend-mentor-exercise-28-pomodoro-app/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-28-pomodoro-app",
+          codeSnippet: `export function calculateSvgProgress(secondsLeft: number, totalSeconds: number, radius = 120): number {
+  const circumference = 2 * Math.PI * radius;
+  const progressRatio = secondsLeft / totalSeconds;
+  return circumference * (1 - progressRatio);
+}`,
+        },
+        {
+          id: "space-tourism-website",
+          title: "SITIO WEB TURISMO ESPACIAL",
+          tags: ["ASTRO", "TAILWIND CSS"],
+          image:
+            "/src/assets/images/project_space_tourism_multi_page_website.jpg",
+          summary:
+            "Experiencia web inmersiva de turismo espacial y astronomía de múltiples páginas con pestañas interactivas para destinos planetarios, tripulación y tecnologías de lanzamiento.",
+          highlights: [
+            "Implementación accesible de pestañas (tablist/tabpanel) con navegación completa por teclado (WAI-ARIA)",
+            "Diseño responsivo que alterna entre pestañas horizontales, paginación por puntos y selectores numéricos",
+            "Arquitectura de Astro orientada a contenido con optimización de imágenes en formatos modernos (AVIF/WebP)",
+          ],
+          liveUrl:
+            "https://barriedirk.github.io/frontend-mentor-exercise-26-space-tourism-multi-page-website/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-26-space-tourism-multi-page-website",
+          codeSnippet: `---
+import Layout from '../layouts/Layout.astro';
+import destinations from '../data/destinations.json';
+const { destination = destinations[0] } = Astro.props;
+---
+<main class="destination-page min-h-screen bg-space-dark text-white px-6 md:px-24 py-12">
+  <h1 class="font-barlow-condensed uppercase tracking-widest text-lg md:text-2xl text-neutral-400">
+    <span class="font-bold text-neutral-600 mr-4">01</span> Pick your destination
+  </h1>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-12">
+    <img src={destination.images.webp} alt={destination.name} class="mx-auto w-64 md:w-96 animate-spin-slow" />
+    <article>
+      <h2 class="font-bellefair text-7xl uppercase">{destination.name}</h2>
+      <p class="font-barlow text-neutral-300 leading-relaxed mt-4">{destination.description}</p>
+    </article>
+  </div>
+</main>`,
+        },
+        {
+          id: "tic-tac-toe-game",
+          title: "JUEGO TRES EN LÍNEA (TIC TAC TOE)",
+          tags: ["JAVASCRIPT", "CSS", "LOCALSTORAGE"],
+          image: "/src/assets/images/project_tic_tac_toe_game.jpg",
+          summary:
+            "Juego clásico de Tres en Línea desarrollado con Vanilla JavaScript y CSS, con gestión de estado unidireccional inspirada en Redux, modo CPU con algoritmo Minimax invencible y persistencia local de puntuaciones.",
+          highlights: [
+            "Algoritmo de IA Minimax que garantiza un modo contra CPU desafiante e imbatible",
+            "Flujo de estado unidireccional (acción -> reductor -> render) implementado puramente en JavaScript ES6+",
+            "Navegación por teclado celda por celda y anuncios para lectores de pantalla",
+          ],
+          liveUrl:
+            "https://barriedirk.github.io/frontend-mentor-exercise-21-tic-tac-toe-game/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-21-tic-tac-toe-game",
+          codeSnippet: `function minimax(board, depth, isMaximizing) {
+  const winner = checkWinner(board);
+  if (winner === 'O') return 10 - depth;
+  if (winner === 'X') return depth - 10;
+  if (board.every(cell => cell !== null)) return 0;
+
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (board[i] === null) {
+        board[i] = 'O';
+        bestScore = Math.max(bestScore, minimax(board, depth + 1, false));
+        board[i] = null;
+      }
+    }
+    return bestScore;
+  }
 }`,
         },
         {
           id: "entertainment-web-app",
-          title: "APP DE ENTRETENIMIENTO",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image:
-            "/src/assets/images/project_entertainment_webapp_1791778852150.jpg",
+          title: "APP WEB DE ENTRETENIMIENTO",
+          tags: ["REACT", "REDUX", "TAILWIND CSS", "REACT ROUTER"],
+          image: "/src/assets/images/project_entertainment_web_app.jpg",
           summary:
-            "Catálogo multimedia estilo plataforma de streaming con sección de tendencias en carrusel horizontal, búsqueda en tiempo real de películas y series, y guardado de favoritos.",
+            "Aplicación de catálogo de streaming y entretenimiento con React y Redux, búsqueda instantánea en tiempo real entre películas y series, filtros por categorías y gestión de marcadores guardados.",
           highlights: [
-            "Búsqueda en vivo combinada en categorías de Películas, Series y Marcadores",
-            "Riel horizontal con scroll snap para títulos en tendencia y superposiciones al pasar el cursor",
-            "Marcadores optimistas con avisos accesibles para lectores de pantalla",
+            "Redux Toolkit para gestionar el guardado de marcadores con sincronización en almacenamiento local",
+            "Rieles de tarjetas accesibles por teclado y cuadrícula responsiva con Tailwind CSS",
+            "Filtro de búsqueda en tiempo real con debounce que actualiza los resultados sin saltos visuales",
           ],
           liveUrl:
-            "https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X",
-          repoUrl: "https://github.com/adamkeyes/entertainment-web-app",
-          codeSnippet: `const filteredCatalog = catalog.filter(item => {
-  const matchesCategory = activeTab === 'all' || item.category === activeTab;
-  const matchesQuery = item.title.toLowerCase().includes(query.toLowerCase());
-  return matchesCategory && matchesQuery;
+            "https://barriedirk.github.io/frontend-mentor-exercise-34-entertainment-web-app/#/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-34-entertainment-web-app",
+          codeSnippet: `export const entertainmentSlice = createSlice({
+  name: 'entertainment',
+  initialState,
+  reducers: {
+    toggleBookmark: (state, action: PayloadAction<string>) => {
+      const item = state.media.find(m => m.id === action.payload);
+      if (item) {
+        item.isBookmarked = !item.isBookmarked;
+        saveBookmarksToStorage(state.media.filter(m => m.isBookmarked).map(m => m.id));
+      }
+    },
+  },
 });`,
         },
         {
           id: "memory-game",
           title: "JUEGO DE MEMORIA",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image: "/src/assets/images/project_memory_game_1791778861130.jpg",
+          tags: ["ANGULAR", "NGRX", "RXJS", "SCSS"],
+          image: "/src/assets/images/project_memory_game.jpg",
           summary:
-            "Juego interactivo de emparejar fichas con soporte para tableros de 4x4 y 6x6, iconos o números, cronómetro individual y modo multijugador por turnos de hasta 4 participantes.",
+            "Juego de memoria interactivo desarrollado en Angular con gestión de estado en NgRx y flujos RxJS, tableros configurables (4x4 y 6x6), fichas de números o iconos y modo multijugador de 1 a 4 personas.",
           highlights: [
-            "Generador aleatorio de fichas mediante el algoritmo de barajado Fisher-Yates",
-            "Máquina de estados multijugador que computa movimientos, parejas acertadas y desempates",
-            "Animaciones de volteo de fichas con latencia cero y navegación íntegra por teclado",
+            "Máquina de estados reactiva con NgRx para rotación de turnos, conteo de pares y desempates",
+            "Flujos reactivos de temporizador con RxJS para el modo individual y conteo de movimientos",
+            "Animaciones 3D de volteo de tarjetas aceleradas por hardware con SCSS modular",
           ],
           liveUrl:
-            "https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM",
-          repoUrl: "https://github.com/adamkeyes/memory-game",
-          codeSnippet: `function shuffleTokens(tokens) {
-  const copy = [...tokens, ...tokens];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+            "https://barriedirk.github.io/frontend-mentor-exercise-33-memory-game/#/",
+          repoUrl:
+            "https://github.com/barriedirk/frontend-mentor-exercise-33-memory-game",
+          codeSnippet: `@Component({
+  selector: 'app-memory-board',
+  templateUrl: './memory-board.component.html',
+  styleUrls: ['./memory-board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MemoryBoardComponent {
+  cards$ = this.store.select(selectCards);
+  isLocked$ = this.store.select(selectIsBoardLocked);
+
+  onCardClick(cardIndex: number): void {
+    this.store.dispatch(MemoryActions.flipCard({ cardIndex }));
   }
-  return copy;
-}`,
-        },
-        {
-          id: "art-gallery-showcase",
-          title: "GALERÍA DE ARTE",
-          tags: ["HTML", "CSS", "JAVASCRIPT"],
-          image: "/src/assets/images/project_art_gallery_1791778870286.jpg",
-          summary:
-            'Experiencia editorial de galería en mosaico ("galleria.") con visor interactivo de diapositivas, barra de progreso en vivo y caja de luz (lightbox) en alta definición.',
-          highlights: [
-            "Diseño de cuadrícula estilo Masonry que respeta las proporciones históricas de cada óleo",
-            "Controlador de presentación secuencial con flechas del teclado y barra de avance",
-            "Visor modal ampliado en alta fidelidad para admirar el detalle de los trazos",
-          ],
-          liveUrl:
-            "https://www.frontendmentor.io/challenges/galleria-slideshow-site-tEA4pwsa6",
-          repoUrl: "https://github.com/adamkeyes/galleria-slideshow-site",
-          codeSnippet: `.masonry-gallery {
-  columns: 4 280px;
-  column-gap: 2.5rem;
-}
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 2.5rem;
 }`,
         },
       ],

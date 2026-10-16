@@ -30,7 +30,6 @@ interface FormErrors {
   message?: string;
 }
 
-
 export default function App() {
   const nameInputRef = useRef<HTMLInputElement | null>(null);
   const contactSectionRef = useRef<HTMLElement | null>(null);
@@ -38,7 +37,7 @@ export default function App() {
   // Language state (default 'en' per Frontend Mentor challenge, or user preference)
   const [lang, setLang] = useState<Language>(() => {
     try {
-      const saved = localStorage.getItem("adam_keyes_lang");
+      const saved = localStorage.getItem("barrie_freyre_lang");
       if (saved === "es" || saved === "en") return saved;
     } catch {
       // Ignore localStorage access issues
@@ -50,7 +49,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("adam_keyes_lang", lang);
+      localStorage.setItem("barrie_freyre_lang", lang);
       document.documentElement.lang = lang;
     } catch {
       // Ignore localStorage access issues
