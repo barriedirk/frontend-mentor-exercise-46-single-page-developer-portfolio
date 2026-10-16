@@ -11,6 +11,10 @@ export interface ProjectsListProps {
   projects: TranslatedProject[];
   viewProjectText: string;
   viewCodeText: string;
+  liveDemoLabel: string;
+  githubLabel: string;
+  liveSiteTooltip: string;
+  githubTooltip: string;
   onOpenModal: (project: TranslatedProject, mode: "preview" | "code") => void;
 }
 
@@ -22,6 +26,10 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
   projects,
   viewProjectText,
   viewCodeText,
+  liveDemoLabel,
+  githubLabel,
+  liveSiteTooltip,
+  githubTooltip,
   onOpenModal,
 }) => {
   return (
@@ -32,6 +40,10 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
           project={project}
           viewProjectText={viewProjectText}
           viewCodeText={viewCodeText}
+          liveDemoLabel={liveDemoLabel}
+          githubLabel={githubLabel}
+          liveSiteTooltip={liveSiteTooltip}
+          githubTooltip={githubTooltip}
           onOpenModal={onOpenModal}
         />
       ))}

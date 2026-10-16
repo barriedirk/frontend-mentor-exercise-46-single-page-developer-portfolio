@@ -340,6 +340,10 @@ export default function App() {
               projects={t.projects.list}
               viewProjectText={t.projects.viewProject}
               viewCodeText={t.projects.viewCode}
+              liveDemoLabel={t.projects.liveDemoLabel}
+              githubLabel={t.projects.githubLabel}
+              liveSiteTooltip={t.projects.liveSiteTooltip}
+              githubTooltip={t.projects.githubTooltip}
               onOpenModal={openProjectModal}
             />
           </section>
