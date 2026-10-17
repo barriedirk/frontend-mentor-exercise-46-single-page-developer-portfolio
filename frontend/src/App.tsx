@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HERO_PORTRAIT_IMAGE } from "./data/projects";
 import { Language, TRANSLATIONS, TranslatedProject } from "./data/translations";
 import {
@@ -17,6 +17,8 @@ import { ScrollDrivenHeroVideo } from "./components/ScrollDrivenHeroVideo";
 import { SocialLinks } from "./components/SocialLinks";
 import { SkillsList } from "./components/SkillsList";
 import { ProjectsList } from "./components/ProjectsList";
+import { ContactSection } from "./components/ContactSection";
+import Footer from "./components/Footer";
 
 interface FormValues {
   name: string;
@@ -64,18 +66,22 @@ export default function App() {
   const isModalOpen = selectedProject !== null || isDesignSystemOpen;
 
   // Contact form state
-  const [formValues, setFormValues] = useState<FormValues>({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [touched, setTouched] = useState<Record<keyof FormValues, boolean>>({
-    name: false,
-    email: false,
-    message: false,
-  });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
+  // @todo remove
+  // const [formValues, setFormValues] = useState<FormValues>({
+  //   name: "",
+  //   email: "",
+  //   message: "",
+  // });
+  // @todo remove
+  // const [touched, setTouched] = useState<Record<keyof FormValues, boolean>>({
+  //   name: false,
+  //   email: false,
+  //   message: false,
+  // });
+
+  // @todo remove
+  // const [errors, setErrors] = useState<FormErrors>({});
+  // const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
 
   // Re-sync selected project when language changes
   useEffect(() => {
@@ -84,76 +90,6 @@ export default function App() {
       if (updated) setSelectedProject(updated);
     }
   }, [lang, t.projects.list, selectedProject]);
-
-  const validateField = (
-    field: keyof FormValues,
-    value: string,
-  ): string | undefined => {
-    const trimmed = value.trim();
-    if (field === "name") {
-      if (!trimmed) return t.contact.errors.required;
-      return undefined;
-    }
-    if (field === "email") {
-      if (!trimmed) return t.contact.errors.required;
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(trimmed)) return t.contact.errors.invalidEmail;
-      return undefined;
-    }
-    if (field === "message") {
-      if (!trimmed) return t.contact.errors.required;
-      return undefined;
-    }
-    return undefined;
-  };
-
-  const validateAll = (values: FormValues): FormErrors => {
-    const nextErrors: FormErrors = {};
-    const nameErr = validateField("name", values.name);
-    const emailErr = validateField("email", values.email);
-    const msgErr = validateField("message", values.message);
-    if (nameErr) nextErrors.name = nameErr;
-    if (emailErr) nextErrors.email = emailErr;
-    if (msgErr) nextErrors.message = msgErr;
-    return nextErrors;
-  };
-
-  const handleInputChange = (field: keyof FormValues, value: string) => {
-    const nextValues = { ...formValues, [field]: value };
-    setFormValues(nextValues);
-    if (submittedMessage) setSubmittedMessage(null);
-
-    if (touched[field]) {
-      const fieldError = validateField(field, value);
-      setErrors((prev) => ({
-        ...prev,
-        [field]: fieldError,
-      }));
-    }
-  };
-
-  const handleInputBlur = (field: keyof FormValues) => {
-    setTouched((prev) => ({ ...prev, [field]: true }));
-    const fieldError = validateField(field, formValues[field]);
-    setErrors((prev) => ({
-      ...prev,
-      [field]: fieldError,
-    }));
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setTouched({ name: true, email: true, message: true });
-    const validationErrors = validateAll(formValues);
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
-      setSubmittedMessage(t.contact.successMessage(formValues.name.trim()));
-      setFormValues({ name: "", email: "", message: "" });
-      setTouched({ name: false, email: false, message: false });
-      setErrors({});
-    }
-  };
 
   const scrollToContact = () => {
     contactSectionRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -168,16 +104,6 @@ export default function App() {
   ) => {
     setSelectedProject(project);
     setModalMode(mode);
-  };
-
-  const getBorderClass = (field: keyof FormValues) => {
-    if (touched[field] && errors[field]) {
-      return "border-[#FF6F5B] focus:border-[#FF6F5B]";
-    }
-    if (formValues[field].trim().length > 0 && !errors[field]) {
-      return "border-[#4EE1A0] focus:border-[#4EE1A0]";
-    }
-    return "border-white/60 focus:border-[#4EE1A0]";
   };
 
   return (
@@ -349,253 +275,31 @@ export default function App() {
           </section>
 
           {/* CONTACT SECTION */}
-          <section
-            ref={contactSectionRef}
-            id="contact"
-            aria-labelledby="contact-heading"
-            className="relative bg-[#242424] pt-[60px] lg:pt-[84px] pb-[87px] md:pb-[92px] overflow-hidden"
-          >
-            <div className="relative max-w-[1110px] mx-auto px-4 md:px-8 lg:px-0">
-              {/* Decorative Rings Bottom-Left of Contact */}
-              <PatternRings className="absolute -left-[343px] bottom-[97px] md:-left-[368px] md:bottom-[27px] lg:-left-[370px] lg:bottom-[47px] z-0" />
-
-              {/* Contact Split Container */}
-              <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-8">
-                {/* Contact Intro Copy */}
-                <div className="w-full max-w-[445px] text-center lg:text-left">
-                  <h2 id="contact-heading" className="heading-xl text-white">
-                    {t.contact.title}
-                  </h2>
-                  <p className="body-l text-[#D9D9D9] mt-5 lg:mt-9">
-                    {t.contact.description}
-                  </p>
-                </div>
-
-                {/* Contact Form */}
-                <form
-                  noValidate
-                  onSubmit={handleFormSubmit}
-                  className="w-full max-w-[445px] space-y-8"
-                >
-                  {/* NAME FIELD */}
-                  <div>
-                    <label htmlFor="contact-name" className="sr-only">
-                      {t.contact.nameLabel}
-                    </label>
-                    <div className="relative">
-                      <input
-                        ref={nameInputRef}
-                        id="contact-name"
-                        name="name"
-                        type="text"
-                        autoComplete="name"
-                        required
-                        aria-required="true"
-                        placeholder={t.contact.namePlaceholder}
-                        aria-invalid={Boolean(touched.name && errors.name)}
-                        aria-describedby={
-                          touched.name && errors.name ? "name-error" : undefined
-                        }
-                        value={formValues.name}
-                        onChange={(e) =>
-                          handleInputChange("name", e.target.value)
-                        }
-                        onBlur={() => handleInputBlur("name")}
-                        className={`w-full bg-transparent pb-4 pl-6 pr-10 border-b ${getBorderClass(
-                          "name",
-                        )} text-white placeholder:text-white/50 text-[16px] leading-[26px] tracking-[-0.22px] font-medium uppercase focus:outline-none transition-colors`}
-                      />
-                      {touched.name && errors.name && (
-                        <IconErrorExclamation className="w-6 h-6 absolute right-0 top-0" />
-                      )}
-                    </div>
-                    {touched.name && errors.name && (
-                      <p
-                        id="name-error"
-                        role="alert"
-                        className="text-[12px] leading-[16px] tracking-[-0.17px] text-[#FF6F5B] text-right mt-[5px]"
-                      >
-                        {errors.name}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* EMAIL FIELD */}
-                  <div>
-                    <label htmlFor="contact-email" className="sr-only">
-                      {t.contact.emailLabel}
-                    </label>
-                    <div className="relative">
-                      <input
-                        id="contact-email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        spellCheck="false"
-                        required
-                        aria-required="true"
-                        placeholder={t.contact.emailPlaceholder}
-                        aria-invalid={Boolean(touched.email && errors.email)}
-                        aria-describedby={
-                          touched.email && errors.email
-                            ? "email-error"
-                            : undefined
-                        }
-                        value={formValues.email}
-                        onChange={(e) =>
-                          handleInputChange("email", e.target.value)
-                        }
-                        onBlur={() => handleInputBlur("email")}
-                        className={`w-full bg-transparent pb-4 pl-6 pr-10 border-b ${getBorderClass(
-                          "email",
-                        )} text-white placeholder:text-white/50 text-[16px] leading-[26px] tracking-[-0.22px] font-medium uppercase focus:outline-none transition-colors`}
-                      />
-                      {touched.email && errors.email && (
-                        <IconErrorExclamation className="w-6 h-6 absolute right-0 top-0" />
-                      )}
-                    </div>
-                    {touched.email && errors.email && (
-                      <p
-                        id="email-error"
-                        role="alert"
-                        className="text-[12px] leading-[16px] tracking-[-0.17px] text-[#FF6F5B] text-right mt-[5px]"
-                      >
-                        {errors.email}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* MESSAGE FIELD */}
-                  <div>
-                    <label htmlFor="contact-message" className="sr-only">
-                      {t.contact.messageLabel}
-                    </label>
-                    <div className="relative">
-                      <textarea
-                        id="contact-message"
-                        name="message"
-                        rows={4}
-                        required
-                        aria-required="true"
-                        placeholder={t.contact.messagePlaceholder}
-                        aria-invalid={Boolean(
-                          touched.message && errors.message,
-                        )}
-                        aria-describedby={
-                          touched.message && errors.message
-                            ? "message-error"
-                            : undefined
-                        }
-                        value={formValues.message}
-                        onChange={(e) =>
-                          handleInputChange("message", e.target.value)
-                        }
-                        onBlur={() => handleInputBlur("message")}
-                        className={`w-full bg-transparent pb-4 pl-6 pr-10 border-b ${getBorderClass(
-                          "message",
-                        )} text-white placeholder:text-white/50 text-[16px] leading-[26px] tracking-[-0.22px] font-medium uppercase resize-none focus:outline-none transition-colors`}
-                      />
-                      {touched.message && errors.message && (
-                        <IconErrorExclamation className="w-6 h-6 absolute right-0 top-0" />
-                      )}
-                    </div>
-                    {touched.message && errors.message && (
-                      <p
-                        id="message-error"
-                        role="alert"
-                        className="text-[12px] leading-[16px] tracking-[-0.17px] text-[#FF6F5B] text-right mt-[5px]"
-                      >
-                        {errors.message}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Confirmation message upon valid submission */}
-                  {submittedMessage && (
-                    <div
-                      role="status"
-                      aria-live="polite"
-                      className="p-4 bg-[#151515] border border-[#4EE1A0] text-[#4EE1A0] text-sm font-medium"
-                    >
-                      {submittedMessage}
-                    </div>
-                  )}
-
-                  {/* SEND MESSAGE BUTTON */}
-                  <div className="flex justify-end pt-1">
-                    <button type="submit" className="btn-underline">
-                      {t.contact.sendBtn}
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </section>
+          <ContactSection
+            sectionRef={contactSectionRef}
+            nameInputRef={nameInputRef}
+            t={{
+              title: t.contact.title,
+              description: t.contact.description,
+              nameLabel: t.contact.nameLabel,
+              emailLabel: t.contact.emailLabel,
+              messageLabel: t.contact.messageLabel,
+              namePlaceholder: t.contact.namePlaceholder,
+              emailPlaceholder: t.contact.emailPlaceholder,
+              messagePlaceholder: t.contact.messagePlaceholder,
+              sendBtn: t.contact.sendBtn,
+              successMessage: t.contact.successMessage,
+            }}
+          />
         </main>
 
         {/* BOTTOM FOOTER BAR */}
-        <footer className="relative bg-[#242424] border-t border-white/25 pt-10 md:pt-[30px] lg:pt-[47px] pb-[60px] md:pb-10 lg:pb-[92px]">
-          <div className="relative max-w-[1110px] mx-auto px-4 md:px-8 lg:px-0 flex flex-col md:flex-row items-center justify-between gap-5">
-            <div className="flex items-center gap-6">
-              <a
-                href="#top"
-                className="text-[24px] md:text-[32px] leading-[32px] font-bold tracking-[-0.33px] md:tracking-[-0.44px] text-white whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] focus-visible:outline-offset-4 rounded-sm"
-              >
-                {t.footer.logo}
-              </a>
-              <button
-                type="button"
-                onClick={() => setIsDesignSystemOpen(true)}
-                className="text-xs font-bold tracking-[1.5px] uppercase text-[#D9D9D9]/50 hover:text-[#4EE1A0] focus-visible:text-[#4EE1A0] focus-visible:outline-2 focus-visible:outline-[#4EE1A0] focus-visible:outline-offset-4 transition-colors cursor-pointer rounded-sm"
-              >
-                {t.footer.designSystemBtn}
-              </button>
-            </div>
-
-            <div className="flex items-center gap-6 md:gap-8">
-              <SocialLinks
-                ariaLabel={t.footer.socialAria}
-                opensInNewTabLabel={t.header.opensInNewTab}
-                className="gap-6 md:gap-8"
-              />
-
-              {/* Footer Language Switcher */}
-              <div
-                role="group"
-                aria-label={t.header.langToggleAria}
-                className="flex items-center text-[13px] font-bold tracking-[1.5px] uppercase pl-2 border-l border-white/20"
-              >
-                <button
-                  type="button"
-                  onClick={() => setLang("en")}
-                  aria-pressed={lang === "en"}
-                  className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                    lang === "en"
-                      ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
-                      : "text-[#D9D9D9]/60 hover:text-white"
-                  }`}
-                >
-                  EN
-                </button>
-                <span className="mx-2 text-white/30" aria-hidden="true">
-                  /
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setLang("es")}
-                  aria-pressed={lang === "es"}
-                  className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                    lang === "es"
-                      ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
-                      : "text-[#D9D9D9]/60 hover:text-white"
-                  }`}
-                >
-                  ES
-                </button>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer
+          t={{ footer: t.footer, header: t.header }}
+          lang={lang}
+          setLang={setLang}
+          setIsDesignSystemOpen={setIsDesignSystemOpen}
+        />
       </div>
 
       {/* Interactive Project Preview / Code Modal (outside inert page wrapper) */}
