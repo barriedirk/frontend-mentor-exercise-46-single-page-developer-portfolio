@@ -6,19 +6,15 @@
 import { useEffect, useRef, useState } from "react";
 import { HERO_PORTRAIT_IMAGE } from "./data/projects";
 import { Language, TRANSLATIONS, TranslatedProject } from "./data/translations";
-import {
-  IconErrorExclamation,
-  PatternCircle,
-  PatternRings,
-} from "./components/Icons";
+import { PatternCircle, PatternRings } from "./components/Icons";
 import { ProjectModal } from "./components/ProjectModal";
 import { DesignSystemModal } from "./components/DesignSystemModal";
 import { ScrollDrivenHeroVideo } from "./components/ScrollDrivenHeroVideo";
-import { SocialLinks } from "./components/SocialLinks";
 import { SkillsList } from "./components/SkillsList";
 import { ProjectsList } from "./components/ProjectsList";
 import { ContactSection } from "./components/ContactSection";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 interface FormValues {
   name: string;
@@ -65,24 +61,6 @@ export default function App() {
 
   const isModalOpen = selectedProject !== null || isDesignSystemOpen;
 
-  // Contact form state
-  // @todo remove
-  // const [formValues, setFormValues] = useState<FormValues>({
-  //   name: "",
-  //   email: "",
-  //   message: "",
-  // });
-  // @todo remove
-  // const [touched, setTouched] = useState<Record<keyof FormValues, boolean>>({
-  //   name: false,
-  //   email: false,
-  //   message: false,
-  // });
-
-  // @todo remove
-  // const [errors, setErrors] = useState<FormErrors>({});
-  // const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
-
   // Re-sync selected project when language changes
   useEffect(() => {
     if (selectedProject) {
@@ -118,59 +96,7 @@ export default function App() {
         inert={isModalOpen ? true : undefined}
         className="min-h-screen bg-[#151515] text-white relative overflow-x-hidden"
       >
-        {/* HEADER */}
-        <header className="relative z-30 max-w-[1110px] mx-auto px-4 md:px-8 lg:px-0 pt-5 md:pt-[29px] lg:pt-[39px] flex flex-col md:flex-row items-center justify-between gap-5">
-          <a
-            href="#top"
-            className="text-[24px] md:text-[32px] leading-[32px] font-bold tracking-[-0.33px] md:tracking-[-0.44px] text-white whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] focus-visible:outline-offset-4 rounded-sm"
-          >
-            {t.header.logo}
-          </a>
-
-          <div className="flex items-center gap-6 md:gap-8 md:pr-[30px]">
-            {/* Social Media Links */}
-            <SocialLinks
-              ariaLabel={t.header.socialAria}
-              opensInNewTabLabel={t.header.opensInNewTab}
-              className="gap-5 md:gap-6"
-            />
-
-            {/* Language Switcher */}
-            <div
-              role="group"
-              aria-label={t.header.langToggleAria}
-              className="flex items-center text-[14px] md:text-[15px] font-bold tracking-[1.5px] uppercase pl-2 border-l border-white/20"
-            >
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                aria-pressed={lang === "en"}
-                className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                  lang === "en"
-                    ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
-                    : "text-[#D9D9D9]/60 hover:text-white"
-                }`}
-              >
-                EN
-              </button>
-              <span className="mx-2 text-white/30" aria-hidden="true">
-                /
-              </span>
-              <button
-                type="button"
-                onClick={() => setLang("es")}
-                aria-pressed={lang === "es"}
-                className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                  lang === "es"
-                    ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
-                    : "text-[#D9D9D9]/60 hover:text-white"
-                }`}
-              >
-                ES
-              </button>
-            </div>
-          </div>
-        </header>
+        <Header t={{ header: t.header }} lang={lang} setLang={setLang} />
 
         {/* PRIMARY MAIN LANDMARK */}
         <main id="content" tabIndex={-1} className="outline-none">
