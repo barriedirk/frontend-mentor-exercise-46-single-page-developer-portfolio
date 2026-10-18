@@ -215,6 +215,7 @@ export default function App() {
               messagePlaceholder: t.contact.messagePlaceholder,
               sendBtn: t.contact.sendBtn,
               successMessage: t.contact.successMessage,
+              errors: t.contact.errors,
             }}
           />
         </main>

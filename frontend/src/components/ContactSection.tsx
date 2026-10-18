@@ -5,11 +5,7 @@
 
 import React from "react";
 import { IconErrorExclamation, PatternRings } from "./Icons";
-import {
-  FormValues,
-  FormErrors,
-  useContactForm,
-} from "../hooks/useContactForm";
+import { useContactForm } from "../hooks/useContactForm";
 
 interface ContactTranslations {
   title: string;
@@ -22,10 +18,10 @@ interface ContactTranslations {
   messagePlaceholder: string;
   sendBtn: string;
   successMessage: (name: string) => string;
-  // errors: {
-  //   required: string;
-  //   invalidEmail: string;
-  // };
+  errors: {
+    required: string;
+    invalidEmail: string;
+  };
 }
 
 interface ContactSectionProps {
@@ -69,7 +65,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     handleInputBlur: onInputBlur,
     handleFormSubmit,
     getBorderClass,
-  } = useContactForm({ required: "", invalidEmail: "" });
+  } = useContactForm(t.errors);
 
   return (
     <section
