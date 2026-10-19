@@ -1,4 +1,5 @@
 import { Language } from "../data/translations";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SocialLinks } from "./SocialLinks";
 
 interface FooterTranslations {
@@ -15,7 +16,7 @@ interface FooterTranslations {
 
 interface FooterProps {
   t: FooterTranslations;
-  lang: string;
+  lang: Language;
   setLang: React.Dispatch<React.SetStateAction<Language>>;
   setIsDesignSystemOpen: (isOpen: boolean) => void;
 }
@@ -52,40 +53,12 @@ export default function Footer({
             className="gap-6 md:gap-8"
           />
 
-          {/* Footer Language Switcher */}
-          <div
-            role="group"
-            aria-label={t.header.langToggleAria}
-            className="flex items-center text-[13px] font-bold tracking-[1.5px] uppercase pl-2 border-l border-white/20"
-          >
-            <button
-              type="button"
-              onClick={() => setLang("en")}
-              aria-pressed={lang === "en"}
-              className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                lang === "en"
-                  ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
-                  : "text-[#D9D9D9]/60 hover:text-white"
-              }`}
-            >
-              EN
-            </button>
-            <span className="mx-2 text-white/30" aria-hidden="true">
-              /
-            </span>
-            <button
-              type="button"
-              onClick={() => setLang("es")}
-              aria-pressed={lang === "es"}
-              className={`transition-colors cursor-pointer pb-0.5 focus-visible:outline-2 focus-visible:outline-[#4EE1A0] rounded-sm ${
-                lang === "es"
-                  ? "text-[#4EE1A0] border-b-2 border-[#4EE1A0]"
-                  : "text-[#D9D9D9]/60 hover:text-white"
-              }`}
-            >
-              ES
-            </button>
-          </div>
+          <LanguageSwitcher
+            lang={lang}
+            setLang={setLang}
+            ariaLabel={t.header.langToggleAria}
+            size="sm"
+          />
         </div>
       </div>
     </footer>

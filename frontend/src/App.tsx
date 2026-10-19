@@ -4,29 +4,16 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { HERO_PORTRAIT_IMAGE } from "./data/projects";
 import { Language, TRANSLATIONS, TranslatedProject } from "./data/translations";
-import { PatternCircle, PatternRings } from "./components/Icons";
+import { PatternRings } from "./components/Icons";
 import { ProjectModal } from "./components/ProjectModal";
 import { DesignSystemModal } from "./components/DesignSystemModal";
-import { ScrollDrivenHeroVideo } from "./components/ScrollDrivenHeroVideo";
+import { HeroSection } from "./components/HeroSection";
 import { SkillsList } from "./components/SkillsList";
 import { ProjectsList } from "./components/ProjectsList";
 import { ContactSection } from "./components/ContactSection";
+import { SiteHeader } from "./components/SiteHeader";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
-
-interface FormValues {
-  name: string;
-  email: string;
-  message: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-}
 
 export default function App() {
   const nameInputRef = useRef<HTMLInputElement | null>(null);
@@ -96,57 +83,18 @@ export default function App() {
         inert={isModalOpen ? true : undefined}
         className="min-h-screen bg-[#151515] text-white relative overflow-x-hidden"
       >
-        <Header t={{ header: t.header }} lang={lang} setLang={setLang} />
+        <SiteHeader
+          logo={t.header.logo}
+          socialAria={t.header.socialAria}
+          langToggleAria={t.header.langToggleAria}
+          opensInNewTab={t.header.opensInNewTab}
+          lang={lang}
+          setLang={setLang}
+        />
 
         {/* PRIMARY MAIN LANDMARK */}
         <main id="content" tabIndex={-1} className="outline-none">
-          {/* HERO SECTION */}
-          <section
-            id="top"
-            aria-label="Introduction"
-            className="relative max-w-[1110px] mx-auto px-4 md:px-8 lg:px-0 pb-20 md:pb-[60px] lg:pb-[104px] md:min-h-[540px] lg:min-h-[652px]"
-          >
-            {/* Decorative Rings Top-Left */}
-            <PatternRings className="absolute -left-[342px] top-[124px] md:-left-[265px] md:top-[86px] lg:-left-[265px] lg:top-[133px] z-0" />
-
-            {/* Portrait Container with Scroll-Driven Video */}
-            <div className="relative mx-auto -mt-[92px] w-[174px] h-[383px] md:mt-0 md:mx-0 md:absolute md:-top-[62px] md:-right-8 md:w-[322px] md:h-[600px] lg:-top-[72px] lg:right-0 lg:w-[445px] lg:h-[720px] bg-gradient-to-b from-[#242424]/40 via-[#242424] to-[#242424] z-10 flex items-end overflow-visible">
-              <ScrollDrivenHeroVideo
-                fallbackImage={HERO_PORTRAIT_IMAGE}
-                alt={t.hero.portraitAlt}
-              />
-
-              {/* Decorative Circle overlapping portrait edge */}
-              <PatternCircle className="absolute -right-[64px] bottom-0 md:-right-[64px] md:bottom-0 lg:right-auto lg:-left-[64.5px] lg:bottom-[70px] z-20" />
-            </div>
-
-            {/* Hero Copy Block */}
-            <div className="relative z-20 mt-10 md:mt-0 md:pt-[90px] lg:pt-[127px] text-center md:text-left max-w-[455px] md:max-w-[455px] lg:max-w-[710px] mx-auto md:mx-0">
-              <h1 className="heading-xl text-white">
-                <span className="block lg:inline">{t.hero.greetingLine1}</span>
-                <span className="block lg:inline">{t.hero.greetingLine2}</span>
-                <span className="inline">{t.hero.imPrefix}</span>
-                <span className="inline-block border-b-4 md:border-b-[6px] border-[#4EE1A0] pb-0.5 md:pb-1.5">
-                  {t.hero.name}
-                </span>
-                <span>{t.hero.dot}</span>
-              </h1>
-
-              <p className="body-l text-[#D9D9D9] mt-6 md:mt-[60px] lg:mt-[43px] mb-6 md:mb-[34px] lg:mb-[66px] max-w-[445px] mx-auto md:mx-0">
-                {t.hero.bio}
-              </p>
-
-              <div>
-                <button
-                  type="button"
-                  onClick={scrollToContact}
-                  className="btn-underline"
-                >
-                  {t.hero.contactBtn}
-                </button>
-              </div>
-            </div>
-          </section>
+          <HeroSection t={t.hero} onContactClick={scrollToContact} />
 
           {/* SKILLS SECTION */}
           <section
