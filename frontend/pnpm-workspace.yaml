@@ -1,0 +1,7 @@
+allowBuilds:
+  '@google/genai': true
+  esbuild: true
+  protobufjs: true
+permissions:
+  dotenv:
+    skills: true
