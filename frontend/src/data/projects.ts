@@ -15,8 +15,7 @@ export interface ProjectItem {
   codeSnippet: string;
 }
 
-export const HERO_PORTRAIT_IMAGE =
-  "/src/assets/images/barrie_freyre_portrait.jpg";
+export const HERO_PORTRAIT_IMAGE = "/images/barrie_freyre_portrait.jpg";
 
 export const SKILLS_DATA: SkillItem[] = [
   { name: "HTML", experience: "10+ Years Experience" },
@@ -33,7 +32,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "link-sharing-app",
     title: "LINK-SHARING APP",
     tags: ["REACT", "EXPRESS", "POSTGRESQL", "NX"],
-    image: "/src/assets/images/project_link_sharing_app.jpg",
+    image: "/images/project_link_sharing_app.jpg",
     summary:
       "Full-stack link-sharing platform built in an Nx monorepo featuring real-time live preview mockups, drag-and-drop link reordering, JWT authentication, and PostgreSQL persistence.",
     highlights: [
@@ -59,7 +58,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "kanban-task-management",
     title: "KANBAN TASK MANAGEMENT",
     tags: ["NEXT.JS", "STRAPI", "ZUSTAND", "REACT HOOK FORM"],
-    image: "/src/assets/images/project_kanban_task_management_web_app.jpg",
+    image: "/images/project_kanban_task_management_web_app.jpg",
     summary:
       "Fully responsive multi-board Kanban application with Strapi headless CMS backend, Zustand state management, subtask completion tracking, and dark/light themes.",
     highlights: [
@@ -86,7 +85,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "audiophile-ecommerce",
     title: "AUDIOPHILE E-COMMERCE",
     tags: ["NEXT.JS", "REACT", "TAILWIND CSS", "STORYBOOK"],
-    image: "/src/assets/images/project_audiophile_ecommerce_website.jpg",
+    image: "/images/project_audiophile_ecommerce_website.jpg",
     summary:
       "High-end multi-page audio gear e-commerce store built with Next.js, Tailwind CSS, persistent shopping cart drawer, and isolated UI component development in Storybook.",
     highlights: [
@@ -115,7 +114,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "currency-converter",
     title: "FOREIGN EXCHANGE CONVERTER",
     tags: ["NEXT.JS", "REACT", "ZUSTAND", "TAILWIND CSS"],
-    image: "/src/assets/images/project_foreign_exchange_currency_converter.jpg",
+    image: "/images/project_foreign_exchange_currency_converter.jpg",
     summary:
       "Modern multi-currency exchange rate application with internationalization (i18n), real-time conversion calculator, historical rate charts, and Zustand state caching.",
     highlights: [
@@ -123,8 +122,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Axios API client with response caching, debounced rate conversions, and resilient error recovery",
       "Interactive charts comparing currency fluctuations over 30, 90, and 365-day timeframes",
     ],
-    liveUrl:
-      "https://foreign-exchange-currency-converter-eta.vercel.app/en",
+    liveUrl: "https://foreign-exchange-currency-converter-eta.vercel.app/en",
     repoUrl:
       "https://github.com/barriedirk/frontend-mentor-exercise-44-foreign-exchange-currency-converter",
     codeSnippet: `export async function convertCurrency(amount: number, from: string, to: string): Promise<ConversionResult> {
@@ -138,7 +136,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "galleria-slideshow",
     title: "GALLERIA SLIDESHOW SITE",
     tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
-    image: "/src/assets/images/project_art_gallery.jpg",
+    image: "/images/project_art_gallery.jpg",
     summary:
       "High-performance editorial masonry art gallery built with Astro and Tailwind CSS, featuring an automated fullscreen slideshow player and interactive painting lightbox.",
     highlights: [
@@ -170,7 +168,7 @@ const progressPercentage = ((currentSlideIndex + 1) / paintings.length) * 100;
     id: "pomodoro-app",
     title: "POMODORO APP",
     tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
-    image: "/src/assets/images/project_pomodoro.jpg",
+    image: "/images/project_pomodoro.jpg",
     summary:
       "Customizable Pomodoro productivity timer built in Astro and Tailwind CSS with configurable intervals (pomodoro, short break, long break), circular SVG timer, and theme customization.",
     highlights: [
@@ -192,7 +190,7 @@ const progressPercentage = ((currentSlideIndex + 1) / paintings.length) * 100;
     id: "space-tourism-website",
     title: "SPACE TOURISM WEBSITE",
     tags: ["ASTRO", "TAILWIND CSS"],
-    image: "/src/assets/images/project_space_tourism_multi_page_website.jpg",
+    image: "/images/project_space_tourism_multi_page_website.jpg",
     summary:
       "Immersive multi-page astronomy and space tourism web experience with interactive tabs for destinations, crew members, and space flight launch technologies.",
     highlights: [
@@ -226,7 +224,7 @@ const { destination = destinations[0] } = Astro.props;
     id: "tic-tac-toe-game",
     title: "TIC TAC TOE GAME",
     tags: ["JAVASCRIPT", "CSS", "LOCALSTORAGE"],
-    image: "/src/assets/images/project_tic_tac_toe_game.jpg",
+    image: "/images/project_tic_tac_toe_game.jpg",
     summary:
       "Classic Tic-Tac-Toe game created with pure vanilla JavaScript and CSS, featuring a Redux-inspired unidirectional state manager, invincible Minimax AI CPU mode, and local score persistence.",
     highlights: [
@@ -261,7 +259,7 @@ const { destination = destinations[0] } = Astro.props;
     id: "entertainment-web-app",
     title: "ENTERTAINMENT WEB APP",
     tags: ["REACT", "REDUX", "TAILWIND CSS", "REACT ROUTER"],
-    image: "/src/assets/images/project_entertainment_web_app.jpg",
+    image: "/images/project_entertainment_web_app.jpg",
     summary:
       "Multi-page streaming catalog entertainment app built with React and Redux, featuring real-time debounced title search across movies & TV series, category filtering, and bookmarked media lists.",
     highlights: [
@@ -291,7 +289,7 @@ const { destination = destinations[0] } = Astro.props;
     id: "memory-game",
     title: "MEMORY GAME",
     tags: ["ANGULAR", "NGRX", "RXJS", "SCSS"],
-    image: "/src/assets/images/project_memory_game.jpg",
+    image: "/images/project_memory_game.jpg",
     summary:
       "Feature-packed memory matching game built in Angular with NgRx state management, RxJS streams, configurable grid sizes (4x4, 6x6), icon or number tokens, and 1 to 4 multiplayer turn tracking.",
     highlights: [

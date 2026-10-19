@@ -262,7 +262,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
           id: "link-sharing-app",
           title: "LINK-SHARING APP",
           tags: ["REACT", "EXPRESS", "POSTGRESQL", "NX"],
-          image: "/src/assets/images/project_link_sharing_app.jpg",
+          image: "/images/project_link_sharing_app.jpg",
           summary:
             "Plataforma full-stack para compartir enlaces construida en un monorepositorio Nx, con vista previa interactiva en dispositivo móvil en tiempo real, reordenamiento drag-and-drop, autenticación JWT y persistencia en PostgreSQL.",
           highlights: [
@@ -288,7 +288,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
           id: "kanban-task-management",
           title: "GESTIÓN DE TAREAS KANBAN",
           tags: ["NEXT.JS", "STRAPI", "ZUSTAND", "REACT HOOK FORM"],
-          image: "/src/assets/images/project_kanban_task_management_web_app.jpg",
+          image: "/images/project_kanban_task_management_web_app.jpg",
           summary:
             "Aplicación Kanban responsiva con múltiples tableros conectada a un CMS headless Strapi, gestión de estado reactiva con Zustand, seguimiento de subtareas y temas claro/oscuro.",
           highlights: [
@@ -315,7 +315,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
           id: "audiophile-ecommerce",
           title: "TIENDA E-COMMERCE AUDIOPHILE",
           tags: ["NEXT.JS", "REACT", "TAILWIND CSS", "STORYBOOK"],
-          image: "/src/assets/images/project_audiophile_ecommerce_website.jpg",
+          image: "/images/project_audiophile_ecommerce_website.jpg",
           summary:
             "Tienda e-commerce multi-página para equipos de audio de alta fidelidad construida con Next.js, Tailwind CSS, carrito de compras persistente y catálogo de componentes en Storybook.",
           highlights: [
@@ -344,8 +344,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
           id: "currency-converter",
           title: "CONVERSOR DE DIVISAS",
           tags: ["NEXT.JS", "REACT", "ZUSTAND", "TAILWIND CSS"],
-          image:
-            "/src/assets/images/project_foreign_exchange_currency_converter.jpg",
+          image: "/images/project_foreign_exchange_currency_converter.jpg",
           summary:
             "Aplicación moderna de cambio de divisas con soporte de internacionalización (i18n), calculadora de conversión en tiempo real, gráficos de tasas históricas y caché de estado con Zustand.",
           highlights: [
@@ -368,7 +367,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
           id: "galleria-slideshow",
           title: "GALERÍA DE ARTE SLIDESHOW",
           tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
-          image: "/src/assets/images/project_art_gallery.jpg",
+          image: "/images/project_art_gallery.jpg",
           summary:
             "Galería de arte editorial con diseño Masonry de alto rendimiento construida con Astro y Tailwind CSS, con reproductor de diapositivas a pantalla completa y visor modal lightbox.",
           highlights: [
@@ -400,7 +399,7 @@ const progressPercentage = ((currentSlideIndex + 1) / paintings.length) * 100;
           id: "pomodoro-app",
           title: "APLICACIÓN POMODORO",
           tags: ["ASTRO", "TAILWIND CSS", "TYPESCRIPT"],
-          image: "/src/assets/images/project_pomodoro.jpg",
+          image: "/images/project_pomodoro.jpg",
           summary:
             "Temporizador de productividad Pomodoro personalizable en Astro y Tailwind CSS con intervalos configurables, reloj circular SVG con cuenta regresiva y personalización de temas y fuentes.",
           highlights: [
@@ -422,8 +421,7 @@ const progressPercentage = ((currentSlideIndex + 1) / paintings.length) * 100;
           id: "space-tourism-website",
           title: "SITIO WEB TURISMO ESPACIAL",
           tags: ["ASTRO", "TAILWIND CSS"],
-          image:
-            "/src/assets/images/project_space_tourism_multi_page_website.jpg",
+          image: "/images/project_space_tourism_multi_page_website.jpg",
           summary:
             "Experiencia web inmersiva de turismo espacial y astronomía de múltiples páginas con pestañas interactivas para destinos planetarios, tripulación y tecnologías de lanzamiento.",
           highlights: [
@@ -457,7 +455,7 @@ const { destination = destinations[0] } = Astro.props;
           id: "tic-tac-toe-game",
           title: "JUEGO TRES EN LÍNEA (TIC TAC TOE)",
           tags: ["JAVASCRIPT", "CSS", "LOCALSTORAGE"],
-          image: "/src/assets/images/project_tic_tac_toe_game.jpg",
+          image: "/images/project_tic_tac_toe_game.jpg",
           summary:
             "Juego clásico de Tres en Línea desarrollado con Vanilla JavaScript y CSS, con gestión de estado unidireccional inspirada en Redux, modo CPU con algoritmo Minimax invencible y persistencia local de puntuaciones.",
           highlights: [
@@ -492,7 +490,7 @@ const { destination = destinations[0] } = Astro.props;
           id: "entertainment-web-app",
           title: "APP WEB DE ENTRETENIMIENTO",
           tags: ["REACT", "REDUX", "TAILWIND CSS", "REACT ROUTER"],
-          image: "/src/assets/images/project_entertainment_web_app.jpg",
+          image: "/images/project_entertainment_web_app.jpg",
           summary:
             "Aplicación de catálogo de streaming y entretenimiento con React y Redux, búsqueda instantánea en tiempo real entre películas y series, filtros por categorías y gestión de marcadores guardados.",
           highlights: [
@@ -522,7 +520,7 @@ const { destination = destinations[0] } = Astro.props;
           id: "memory-game",
           title: "JUEGO DE MEMORIA",
           tags: ["ANGULAR", "NGRX", "RXJS", "SCSS"],
-          image: "/src/assets/images/project_memory_game.jpg",
+          image: "/images/project_memory_game.jpg",
           summary:
             "Juego de memoria interactivo desarrollado en Angular con gestión de estado en NgRx y flujos RxJS, tableros configurables (4x4 y 6x6), fichas de números o iconos y modo multijugador de 1 a 4 personas.",
           highlights: [
