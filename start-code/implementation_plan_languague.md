@@ -1,4 +1,4 @@
-# Soporte Bilingüe (Inglés / Castellano) — Portafolio Adam Keyes
+# Soporte Bilingüe (Inglés / Castellano) — Portafolio Barrie Freyre
 
 Incorporación de un sistema de internacionalización (i18n) ligero, modular y tipado para permitir alternar fluidamente entre inglés (predeterminado según el reto de Frontend Mentor) y castellano, manteniendo intacta la fidelidad visual del sistema de diseño.
 
@@ -32,7 +32,7 @@ Incorporación de un sistema de internacionalización (i18n) ligero, modular y t
      - Separador tipográfico discreto `/` o `|`.
    - Sin recargas ni parpadeos: el cambio es instantáneo e imperceptible.
 3. **Traducción Coherente por Secciones**:
-   - **Hero**: `"¡Mucho gusto! Soy Adam Keyes."` (con subrayado en `"Adam Keyes"`), biografía traducida: `"Radicado en el Reino Unido, soy un desarrollador front-end apasionado por crear aplicaciones web accesibles que encanten a los usuarios."`, y botón `"CONTÁCTAME"`.
+   - **Hero**: `"¡Mucho gusto! Soy Barrie Freyre."` (con subrayado en `"Barrie Freyre"`), biografía traducida: `"Radicado en el Reino Unido, soy un desarrollador front-end apasionado por crear aplicaciones web accesibles que encanten a los usuarios."`, y botón `"CONTÁCTAME"`.
    - **Habilidades (Skills)**: `"4 años de experiencia"` / `"3 años de experiencia"`.
    - **Proyectos**: `"Proyectos"`, `"VER PROYECTO"`, `"VER CÓDIGO"`, con descripciones detalladas y aspectos clave en español en el modal interactivo.
    - **Formulario de Contacto**: `"Contacto"`, texto descriptivo traducido, placeholders en mayúsculas (`NOMBRE`, `CORREO ELECTRÓNICO`, `MENSAJE`), validaciones en español (`"Disculpa, no puede estar vacío"`, `"Disculpa, formato inválido aquí"`), botón `"ENVIAR MENSAJE"` y mensaje de éxito tras el envío.

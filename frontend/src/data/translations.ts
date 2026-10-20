@@ -76,6 +76,7 @@ export interface Translations {
     messagePlaceholder: string;
     sendBtn: string;
     successMessage: (name: string) => string;
+    submissionErrorMessage: string;
     errors: {
       required: string;
       invalidEmail: string;
@@ -173,7 +174,9 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       messagePlaceholder: "MESSAGE",
       sendBtn: "SEND MESSAGE",
       successMessage: (name: string) =>
-        `Thank you, ${name}! Your message has been received and Adam will get back to you soon.`,
+        `Thank you, ${name}! Your message has been received and Barrie will get back to you soon.`,
+      submissionErrorMessage:
+        "Your message could not be sent. Please try again.",
       errors: {
         required: "Sorry, can't be empty",
         invalidEmail: "Sorry, invalid format here",
@@ -561,7 +564,9 @@ export class MemoryBoardComponent {
       messagePlaceholder: "MENSAJE",
       sendBtn: "ENVIAR MENSAJE",
       successMessage: (name: string) =>
-        `¡Muchas gracias, ${name}! Tu mensaje ha sido recibido y Adam se pondrá en contacto pronto.`,
+        `¡Muchas gracias, ${name}! Tu mensaje ha sido recibido y Barrie se pondrá en contacto pronto.`,
+      submissionErrorMessage:
+        "No se pudo enviar tu mensaje. Inténtalo de nuevo.",
       errors: {
         required: "Disculpa, no puede estar vacío",
         invalidEmail: "Disculpa, formato inválido aquí",

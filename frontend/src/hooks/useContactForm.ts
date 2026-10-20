@@ -92,20 +92,39 @@ export function useContactForm(errors_t: ContactFormErrors) {
     setErrors((prev) => ({ ...prev, [field]: fieldError }));
   };
 
-  const handleFormSubmit = (
+  const handleFormSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
     successMessage: string,
+    submissionErrorMessage: string,
   ) => {
     e.preventDefault();
     setTouched({ name: true, email: true, message: true });
     const validationErrors = validateAll(formValues);
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0) {
+    if (Object.keys(validationErrors).length > 0) return;
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "45e46188-d857-44e8-8989-53bd0445353b");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data: { success?: boolean } = await response.json();
+
+      if (!response.ok || !data.success) {
+        setSubmittedMessage(submissionErrorMessage);
+        return;
+      }
+
       setSubmittedMessage(successMessage);
       setFormValues({ name: "", email: "", message: "" });
       setTouched({ name: false, email: false, message: false });
       setErrors({});
+    } catch {
+      setSubmittedMessage(submissionErrorMessage);
     }
   };
 

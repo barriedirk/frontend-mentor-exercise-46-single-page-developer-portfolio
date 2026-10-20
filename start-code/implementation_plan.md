@@ -1,4 +1,4 @@
-# Portafolio de Desarrollador Single-Page — Adam Keyes (Frontend Mentor)
+# Portafolio de Desarrollador Single-Page — Barrie Freyre (Frontend Mentor)
 
 Implementación pixel-perfect y totalmente responsiva del reto **Single-Page Developer Portfolio** de Frontend Mentor, reproduciendo con exactitud el sistema de diseño proporcionado, los puntos de quiebre (Desktop, Tablet y Mobile), las superposiciones interactivas en los proyectos y la validación en tiempo real del formulario de contacto.
 
@@ -7,7 +7,7 @@ Implementación pixel-perfect y totalmente responsiva del reto **Single-Page Dev
 > [!IMPORTANT]
 > Revisa las decisiones confirmadas antes de iniciar la construcción del código y generación de recursos visuales:
 
-- **Estructura Single-Page e Imágenes de Proyectos**: Se implementará como un portafolio de una sola página fiel a las 4 capturas proporcionadas (`Desktop`, `Tablet`, `Mobile` y `Design System`), generando retratos y miniaturas de alta fidelidad visual para el perfil de Adam Keyes y los 6 proyectos destacados, además de un visor lightbox/modal opcional al hacer clic en `VIEW PROJECT` o `VIEW CODE` para inspeccionar cada proyecto en detalle sin salir de la aplicación.
+- **Estructura Single-Page e Imágenes de Proyectos**: Se implementará como un portafolio de una sola página fiel a las 4 capturas proporcionadas (`Desktop`, `Tablet`, `Mobile` y `Design System`), generando retratos y miniaturas de alta fidelidad visual para el perfil de Barrie Freyre y los 6 proyectos destacados, además de un visor lightbox/modal opcional al hacer clic en `VIEW PROJECT` o `VIEW CODE` para inspeccionar cada proyecto en detalle sin salir de la aplicación.
 - **Validación del Formulario de Contacto**: Se aplicarán exactamente los estados del *Design System* (reposo `#D9D9D9`/`#FFFFFF`, foco/activo en verde `#4EE1A0`, y estado de error en rojo coral `#FF6F5B` con el mensaje `"Sorry, invalid format here"` e ícono de advertencia circular), junto con confirmación visual al enviar un mensaje válido.
 - **Arquitectura Modular de Componentes**: Estructuraremos la aplicación con componentes desacoplados y tipados en TypeScript (Cabecera, Héroe, Cuadrícula de Habilidades, Galería de Proyectos y Formulario de Contacto) listos para previsualización inmediata y portables a Next.js.
 
@@ -15,7 +15,7 @@ Implementación pixel-perfect y totalmente responsiva del reto **Single-Page Dev
 
 ## 1. Overview & Core Concept
 
-- **What It Does**: Presenta el portafolio profesional de **Adam Keyes**, desarrollador front-end radicado en el Reino Unido, destacando su biografía, años de experiencia en 6 tecnologías clave, una galería interactiva de 6 proyectos web y un formulario de contacto validado en tiempo real.
+- **What It Does**: Presenta el portafolio profesional de **Barrie Freyre**, desarrollador front-end radicado en el Reino Unido, destacando su biografía, años de experiencia en 6 tecnologías clave, una galería interactiva de 6 proyectos web y un formulario de contacto validado en tiempo real.
 - **Target Audience / Persona**: Reclutadores técnicos, clientes potenciales y evaluadores de retos de Frontend Mentor que buscan precisión tipográfica, accesibilidad (WCAG AA, navegación por teclado) y adaptación fluida entre móvil, tableta y escritorio.
 - **Key Value**: Fidelidad absoluta al sistema de diseño original combinada con micro-interacciones fluidas, estados de formulario reales y activos gráficos generados a medida sin enlaces rotos.
 
@@ -25,8 +25,8 @@ Implementación pixel-perfect y totalmente responsiva del reto **Single-Page Dev
 
 ### Key User Flows
 1. **Presentación e Impacto Inicial (Hero & Navegación)**:
-   - Cabecera superior con el logotipo `adamkeyes` a la izquierda y los 4 íconos sociales (`GitHub`, `Frontend Mentor`, `LinkedIn`, `Twitter/X`) a la derecha, superpuestos sobre el contenedor del retrato en blanco y negro en Tablet y Desktop, o centrados en columna en Mobile.
-   - Titular principal `"Nice to meet you! I'm Adam Keyes."` con subrayado grueso en verde esmeralda (`#4EE1A0`) bajo `"Adam Keyes"` y botón de acción `"CONTACT ME"` que desplaza suavemente la vista hacia el formulario inferior.
+   - Cabecera superior con el logotipo `barriefreyre` a la izquierda y los 4 íconos sociales (`GitHub`, `Frontend Mentor`, `LinkedIn`, `Twitter/X`) a la derecha, superpuestos sobre el contenedor del retrato en blanco y negro en Tablet y Desktop, o centrados en columna en Mobile.
+   - Titular principal `"Nice to meet you! I'm Barrie Freyre."` con subrayado grueso en verde esmeralda (`#4EE1A0`) bajo `"Barrie Freyre"` y botón de acción `"CONTACT ME"` que desplaza suavemente la vista hacia el formulario inferior.
 2. **Exploración de Habilidades (Skills Grid)**:
    - Sección delimitada por una línea divisoria horizontal (`#FFFFFF` / `#D9D9D9` con opacidad sutil), mostrando **HTML** (4 Years Experience), **CSS** (4 Years Experience), **Javascript** (4 Years Experience), **Accessibility** (4 Years Experience), **React** (3 Years Experience) y **Sass** (3 Years Experience).
    - Distribución adaptativa: 1 columna centrada en Mobile (con línea divisoria inferior), 2 columnas en Tablet y 3 columnas en Desktop, acompañada de los anillos decorativos SVG en el extremo derecho.

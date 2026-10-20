@@ -163,6 +163,7 @@ export default function App() {
               messagePlaceholder: t.contact.messagePlaceholder,
               sendBtn: t.contact.sendBtn,
               successMessage: t.contact.successMessage,
+              submissionErrorMessage: t.contact.submissionErrorMessage,
               errors: t.contact.errors,
             }}
           />

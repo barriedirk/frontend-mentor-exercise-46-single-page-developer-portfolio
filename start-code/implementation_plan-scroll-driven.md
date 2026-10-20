@@ -1,4 +1,4 @@
-# Integración de Video Scroll-Driven — Retrato Hero (Adam Keyes)
+# Integración de Video Scroll-Driven — Retrato Hero (Barrie Freyre)
 
 Sustitución de la imagen estática del retrato de la sección Hero por un video interactivo alojado en Cloudinary, sincronizado mediante desplazamiento de pantalla (*scroll-driven scrubbing*) con aceleración por hardware y preservando la estética monocromática del sistema de diseño de Frontend Mentor.
 
@@ -42,7 +42,7 @@ Sustitución de la imagen estática del retrato de la sección Hero por un video
   - *Chosen Approach*: Implementar un suavizado de fotogramas donde el valor de tiempo del video se aproxima progresivamente al tiempo objetivo (`currentTime += (targetTime - currentTime) * 0.15`).
   - *Why*: Modificar directamente `video.currentTime` en cada evento de scroll del navegador provoca micro-tirones y sobrecarga el decodificador; la interpolación garantiza 60fps constantes.
 - **Decision 2: Resiliencia y Fallback Automático**
-  - *Chosen Approach*: Si la conexión es lenta, falla la red o el usuario tiene activada la preferencia de accesibilidad `prefers-reduced-motion`, el sistema mantiene de respaldo la imagen estática optimizada de Adam Keyes sin romper el diseño.
+  - *Chosen Approach*: Si la conexión es lenta, falla la red o el usuario tiene activada la preferencia de accesibilidad `prefers-reduced-motion`, el sistema mantiene de respaldo la imagen estática optimizada de Barrie Freyre sin romper el diseño.
   - *Why*: Cumple con las pautas de accesibilidad WCAG y la regla de tolerancia a fallos de `frontend-design`.
 
 ---

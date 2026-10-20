@@ -18,6 +18,7 @@ interface ContactTranslations {
   messagePlaceholder: string;
   sendBtn: string;
   successMessage: (name: string) => string;
+  submissionErrorMessage: string;
   errors: {
     required: string;
     invalidEmail: string;
@@ -28,15 +29,6 @@ interface ContactSectionProps {
   t: ContactTranslations;
   sectionRef: React.RefObject<HTMLElement | null>;
   nameInputRef: React.RefObject<HTMLInputElement | null>;
-  // Form state & handlers from useContactForm
-  // formValues: FormValues;
-  // touched: Record<keyof FormValues, boolean>;
-  // errors: FormErrors;
-  // submittedMessage: string | null;
-  // onInputChange: (field: keyof FormValues, value: string) => void;
-  // onInputBlur: (field: keyof FormValues) => void;
-  // onSubmit: (e: React.FormEvent) => void;
-  // getBorderClass: (field: keyof FormValues) => string;
 }
 
 /**
@@ -47,14 +39,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   t,
   sectionRef,
   nameInputRef,
-  // formValues,
-  // touched,
-  // errors,
-  // submittedMessage,
-  // onInputChange,
-  // onInputBlur,
-  // onSubmit,
-  // getBorderClass,
 }) => {
   const {
     formValues,
@@ -94,7 +78,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <form
             noValidate
             onSubmit={(e) =>
-              handleFormSubmit(e, t.successMessage(formValues.name))
+              handleFormSubmit(
+                e,
+                t.successMessage(formValues.name),
+                t.submissionErrorMessage,
+              )
             }
             className="w-full max-w-[445px] space-y-8"
           >
